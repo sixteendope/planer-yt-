@@ -1,131 +1,2633 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>планер ютуба</title>
-<style>
-:root{--bg:#000;--c:#1c1c1e;--c2:#2c2c2e;--tx:#fff;--mu:#8e8e93;--inv:#fff;--it:#000;--gl:rgba(255,255,255,.2);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-:root[data-theme=light]{--bg:#f2f2f7;--c:#fff;--c2:#e5e5ea;--tx:#000;--inv:#000;--it:#fff;--gl:rgba(0,0,0,.14);color-scheme:light}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--tx)}
-body{font-family:-apple-system,"SF Pro Display",Inter,Helvetica,Arial,sans-serif;font-weight:600;min-height:100vh;text-transform:lowercase}
-#app{max-width:520px;margin:0 auto;padding:18px 18px 40px}
-.top{display:flex;justify-content:space-between;align-items:center;margin:8px 0 16px}
-h1{font-size:40px;font-weight:800;margin:0;letter-spacing:-1px}
-.bt{display:flex;gap:10px}
-.rb{width:56px;height:56px;border-radius:50%;background:var(--c);border:0;color:var(--tx);font-size:24px;font-weight:800;font-family:inherit;display:flex;align-items:center;justify-content:center}
-.ht{width:26px;height:26px;border-radius:50%;border:3px solid var(--tx);background:linear-gradient(90deg,var(--tx) 50%,transparent 50%)}
-.hon{position:relative;height:48px;margin:6px 0 18px}
-.trk{position:absolute;left:0;right:0;top:22px;height:4px;border-radius:4px;background:var(--c2)}
-.kn{position:absolute;top:0;width:48px;height:48px;border-radius:50%;background:#1c1c1e;border:2px solid var(--c2);box-shadow:0 0 22px var(--gl);display:flex;align-items:center;justify-content:center;font-size:24px;transition:left .7s cubic-bezier(.3,.8,.3,1),color .7s}
-.hl{color:var(--mu);font-size:13px;letter-spacing:2px;margin:0 0 4px 4px}
-.main{background:var(--inv);color:var(--it);border-radius:32px;padding:26px;box-shadow:0 0 60px var(--gl);animation:up .5s}
-.lb{font-size:13px;letter-spacing:2px;opacity:.5}
-.big{font-size:30px;font-weight:800;line-height:1.1;margin:10px 0 8px}
-.sb{opacity:.55;font-size:15px;margin-bottom:22px}
-.go{width:100%;height:56px;border-radius:28px;border:0;background:var(--it);color:var(--inv);font-size:17px;font-weight:800;font-family:inherit;transition:transform .15s}
-.go:active,.rb:active,.pill:active{transform:scale(.96)}
-.tl{display:flex;gap:12px;margin:14px 0}
-.tile{flex:1;background:var(--c);border-radius:26px;padding:18px}
-.tile b{display:block;font-size:26px;font-weight:800;margin-top:6px}
-.tile span{color:var(--mu);font-size:13px;letter-spacing:1px}
-.lk{display:flex;justify-content:space-between;padding:22px 14px 8px;font-size:22px;font-weight:800;text-shadow:0 0 18px var(--gl)}
-.lk a{cursor:pointer}
-.cp{text-align:center;color:var(--mu);margin-top:34px;font-size:15px}
-.vh{display:flex;justify-content:space-between;align-items:baseline;margin:22px 4px 10px}
-.vh b{font-size:24px;font-weight:800}.vh small,.mu{color:var(--mu);font-size:13px}
-.g{background:var(--c);border-radius:26px;padding:6px 16px;margin-bottom:10px;overflow:hidden;max-height:900px;transition:max-height .7s cubic-bezier(.3,.8,.3,1),padding .7s,opacity .7s}
-.g.d{max-height:56px;opacity:.55}
-.gn{font-size:17px;font-weight:800;padding:14px 0;display:flex;justify-content:space-between}
-.row{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--c2)}
-.row span{flex:1}.row.x span{color:var(--mu);text-decoration:line-through}
-.ck{width:22px;height:22px;border-radius:50%;border:2px solid var(--mu);flex:none}
-.x .ck{background:var(--tx);border-color:var(--tx)}
-.row b{color:var(--mu);padding:0 6px;font-size:20px}
-.pill{background:var(--c);border:0;color:var(--tx);border-radius:24px;padding:14px 20px;font-size:16px;font-weight:800;font-family:inherit;margin:4px 6px 4px 0}
-.pill.w{background:var(--inv);color:var(--it)}
-.tm{text-align:center;font-size:84px;font-weight:800;margin:70px 0 10px;letter-spacing:-3px;text-shadow:0 0 40px var(--gl)}
-.tc{text-align:center}
-.sh{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;z-index:9;animation:fd .25s}
-.si{background:var(--c);width:100%;max-width:520px;margin:0 auto;border-radius:32px 32px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));animation:up .35s}
-.si h2{margin:0 0 14px;font-size:26px;font-weight:800}
-input,select{width:100%;background:var(--c2);color:var(--tx);border:0;border-radius:18px;padding:15px;font-size:16px;font-family:inherit;margin:0 0 10px;text-transform:none}
-.ln{padding:8px 0;color:var(--tx);font-size:17px}
-@keyframes up{from{transform:translateY(14px);opacity:0}}@keyframes fd{from{opacity:0}}
-</style></head><body><div id="app"></div>
+<meta name="description" content="спокойный планер для съёмок, монтажа и идей. всё хранится на этом устройстве.">
+<meta name="theme-color" content="#070707" id="metaTheme">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="планер">
+<meta name="format-detection" content="telephone=no">
+<link id="appleIcon" rel="apple-touch-icon" href="">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23080808'/%3E%3Cpath d='M32 12l4.9 13.1L50 30l-13.1 4.9L32 48l-4.9-13.1L14 30l13.1-4.9z' fill='%23f7f7f4'/%3E%3C/svg%3E">
 <script>
-var K="planer_yt_v1",S,A=document.getElementById("app");
-function day(d){d=d||new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
-function id(){return Math.random().toString(36).slice(2,8)}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
-try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
-if(!S)S={theme:"dark",honor:50,videos:[],ideas:[],log:{},view:"today",timer:null,last:day(),pen:""};
-function lg(){var k=day();return S.log[k]=S.log[k]||{d:0,m:0,h:S.honor}}
-function wd(a,b){var n=0,x=new Date(a);x.setDate(x.getDate()+1);while(x<=new Date(b)){if(x.getDay()%6)n++;x.setDate(x.getDate()+1)}return n}
-function init(){lg();if(cur()&&S.pen!=day()){var m=wd(S.last,day())-(new Date().getDay()%6?1:0);if(m>0)S.honor=Math.max(0,S.honor-Math.min(10,m*2));S.pen=day()}save()}
-var T=[["подготовка",[["идея и название","t",30],["сценарий","t",40],["список бирол","t",30],["сюжет и сценки: как показать мысль каждой главы","t",40],["переходы между главами","t",40]]],
-["съемка",[["говорящая голова","s"],["домашние биролы","s"],["уличные биролы (нужен помощник)","s"]]],
-["монтаж",[["сброс на комп","s"],["нарезка головы","t",60],["начальная сценка и крутые моменты","t",60],["переходы","t",45],["саунддизайн","t",45],["вставка бирол","t",60],["музыка","t",40],["цветокоррекция","t",45]]],
-["финал",[["рендер","d"],["превью","d"],["выкладка","d"]]]];
-function mk(n,dt){return{id:id(),n:n,date:dt,groups:T.map(function(g){return{id:id(),n:g[0],tasks:g[1].map(function(t){return{id:id(),n:t[0],y:t[1],m:t[2]||0,done:0}})}})}}
-function cur(){for(var v of S.videos)for(var g of v.groups)for(var t of g.tasks)if(!t.done)return{v:v,g:g,t:t};return null}
-function st(){var a=0,d=0;S.videos.forEach(function(v){v.groups.forEach(function(g){g.tasks.forEach(function(t){a++;if(t.done)d++})})});return{a:a,d:d}}
-function fin(t,g){lg();t.done=1;S.honor=Math.min(100,S.honor+4);var L=lg();L.d++;L.m+=t.m||0;S.last=day();if(g.tasks.every(function(x){return x.done}))S.anim=g.id}
-function skip(c){lg();S.honor=Math.max(0,S.honor-3);var a=c.g.tasks,i=a.indexOf(c.t);if(i<a.length-1){a.splice(i,1);a.splice(i+1,0,c.t)}}
-function top(t){return'<div class="top"><h1>'+t+'</h1><div class="bt"><button class="rb" data-a="idea">+</button><button class="rb" data-a="theme"><span class="ht"></span></button></div></div>'}
-function hon(){var h=S.honor,r=Math.round(190+65*h/100),g=Math.round(20+235*h/100),b=Math.round(80+175*h/100);
-return'<div class="hl">честь</div><div class="hon"><div class="trk"></div><div class="kn" style="left:calc((100% - 48px)*'+h/100+');color:rgb('+r+','+g+','+b+');text-shadow:0 0 14px rgb('+r+','+g+','+b+')">★</div></div>'}
-function today(){var c=cur(),s=st(),h=top("сегодня")+hon();
-if(!c)h+='<div class="main"><div class="lb">сейчас</div><div class="big">задач нет</div><div class="sb">создай видео, и я раскидаю этапы</div><button class="go" data-a="newv">новое видео</button></div>';
-else{var y=c.t.y;h+='<div class="main"><div class="lb">сейчас</div><div class="big">'+esc(c.t.n)+'</div><div class="sb">'+esc(c.v.n)+' · '+c.g.n+(y=="t"?' · '+c.t.m+' мин':'')+'</div><button class="go" data-a="go">'+(y=="t"?"начать":y=="s"?"снято":"готово")+'</button></div>';
-var dl=c.v.date?Math.ceil((new Date(c.v.date)-new Date(day()))/864e5):null;
-h+='<div class="tl"><div class="tile"><span>шагов</span><b>'+s.d+' из '+s.a+'</b></div><div class="tile"><span>до выхода</span><b>'+(dl===null?"-":dl+" дн")+'</b></div></div>'}
-return h+'<div class="lk"><a data-a="all">все задачи</a><a data-a="end">завершить день</a></div>'}
-function all(){var h=top("все задачи")+'<button class="pill w" data-a="back">назад</button><button class="pill" data-a="newv">новое видео</button><button class="pill" data-a="addt">+ задача</button>';
-S.videos.forEach(function(v){var left=0;v.groups.forEach(function(g){g.tasks.forEach(function(t){if(!t.done)left++})});
-var pd=v.date&&left?Math.ceil(left/Math.max(1,wd(day(),v.date))*10)/10:0;
-h+='<div class="vh"><b>'+esc(v.n)+'</b><small data-a="rp" data-id="'+v.id+'">'+(v.date?v.date.slice(5)+" · ":"")+left+' шагов'+(pd?' · ~'+pd+'/день':'')+' ✎</small></div>';
-v.groups.forEach(function(g){var d=g.tasks.every(function(t){return t.done});var an=S.anim==g.id;
-h+='<div class="g'+(d&&!an?' d':'')+'" data-g="'+g.id+'"><div class="gn"><span>'+g.n+'</span><span class="mu">'+(d?'готово':g.tasks.filter(function(t){return t.done}).length+'/'+g.tasks.length)+'</span></div>';
-g.tasks.forEach(function(t){h+='<div class="row'+(t.done?' x':'')+'" data-a="tg" data-id="'+t.id+'"><i class="ck"></i><span>'+esc(t.n)+'</span>'+(t.y=="t"?'<small class="mu">'+t.m+'м</small>':'')+'<b data-a="del" data-id="'+t.id+'">×</b></div>'});h+='</div>'})});
-if(!S.videos.length)h+='<p class="mu" style="padding:20px 4px">пока пусто</p>';return h}
-function mmss(ms){ms=Math.max(0,Math.ceil(ms/1000));return("0"+Math.floor(ms/60)).slice(-2)+":"+("0"+ms%60).slice(-2)}
-function tim(){var T=S.timer,c=cur(),w=T.k=="w",h=top(w?"таймер":"перерыв")+'<div class="tc mu">'+(w&&c?esc(c.t.n):"выдохни")+'</div>';
-if(T.fin)return h+'<div class="tm" style="font-size:40px">'+(w?"время вышло":"перерыв закончился")+'</div><div class="tc">'+(w?'<button class="pill" data-a="tb">перерыв</button><button class="pill w" data-a="td">выполнено</button><button class="pill" data-a="tn">не сегодня</button>':'<button class="pill w" data-a="tx">продолжить</button>')+'</div>';
-return h+'<div class="tm" id="tm">'+mmss(T.end-Date.now())+'</div><div class="tc"><button class="pill" data-a="tm5">- 5</button><button class="pill" data-a="tp5">+ 5</button><button class="pill" data-a="tx">стоп</button></div>'}
-function R(){document.documentElement.dataset.theme=S.theme;A.innerHTML=(S.timer?tim():S.view=="all"?all():today())+'<div class="cp">sixteendope ©</div>';
-if(S.anim){var g=A.querySelector('[data-g="'+S.anim+'"]');S.anim=null;if(g)setTimeout(function(){g.classList.add("d")},60)}}
-function sheet(h){var d=document.createElement("div");d.className="sh";d.dataset.a="cl";d.innerHTML='<div class="si">'+h+'</div>';document.body.appendChild(d);return d}
-function cl(){var s=document.querySelector(".sh");if(s)s.remove()}
-function find(i){for(var v of S.videos)for(var g of v.groups)for(var t of g.tasks)if(t.id==i)return{v:v,g:g,t:t}}
-var D={
-theme:function(){S.theme=S.theme=="dark"?"light":"dark"},
-all:function(){S.view="all"},back:function(){S.view="today"},
-go:function(){var c=cur();if(!c)return;if(c.t.y=="t"){S.timer={k:"w",end:Date.now()+c.t.m*6e4,m:c.t.m};try{navigator.wakeLock&&navigator.wakeLock.request("screen")}catch(e){}}else fin(c.t,c.g)},
-tp5:function(){S.timer.end+=3e5;S.timer.m+=5},tm5:function(){S.timer.end-=3e5;S.timer.m=Math.max(5,S.timer.m-5)},
-tx:function(){S.timer=null},
-td:function(){var c=cur();if(c){c.t.m=S.timer.m||c.t.m;fin(c.t,c.g)}S.timer=null},
-tn:function(){var c=cur();if(c)skip(c);S.timer=null},
-tb:function(){S.timer={k:"b",end:Date.now()+6e5}},
-tg:function(e){var f=find(e.dataset.id);if(!f)return;if(f.t.done)f.t.done=0;else fin(f.t,f.g)},
-del:function(e){var f=find(e.dataset.id);if(f&&confirm("удалить?"))f.g.tasks.splice(f.g.tasks.indexOf(f.t),1)},
-idea:function(){var h='<h2>идея</h2><input id="iv" placeholder="что пришло в голову"><button class="pill w" data-a="ia">записать</button>';S.ideas.forEach(function(x,i){h+='<div class="ln">'+esc(x)+' <span class="mu" data-a="id" data-id="'+i+'">×</span></div>'});sheet(h);return 1},
-ia:function(){var v=document.getElementById("iv").value.trim();if(v)S.ideas.unshift(v);cl();D.idea();return 1},
-id:function(e){S.ideas.splice(+e.dataset.id,1);cl();D.idea();return 1},
-newv:function(){var x=new Date();x.setDate(x.getDate()+14);sheet('<h2>новое видео</h2><input id="nn" placeholder="название"><input id="nd" type="date" value="'+day(x)+'"><button class="pill w" data-a="nc">создать</button>');return 1},
-nc:function(){var n=document.getElementById("nn").value.trim();if(!n)return 1;S.videos.push(mk(n,document.getElementById("nd").value));cl();S.view="today"},
-rp:function(e){sheet('<h2>пересобрать план</h2><p class="mu">новая дата выхода, остальные шаги разделятся по дням</p><input id="nd" type="date" value="'+day()+'"><button class="pill w" data-a="rc" data-id="'+e.dataset.id+'">готово</button>');return 1},
-rc:function(e){S.videos.forEach(function(v){if(v.id==e.dataset.id)v.date=document.getElementById("nd").value});cl()},
-addt:function(){sheet('<h2>новая задача</h2><input id="an" placeholder="что сделать"><select id="ay"><option value="t">с таймером</option><option value="s">одним тапом</option><option value="d">на день</option></select><input id="am" type="number" value="30" placeholder="минут"><button class="pill w" data-a="ac">добавить</button>');return 1},
-ac:function(){var n=document.getElementById("an").value.trim();if(!n)return 1;var v=S.videos.filter(function(x){return x.id=="own"})[0];if(!v){v={id:"own",n:"свои задачи",date:"",groups:[{id:id(),n:"задачи",tasks:[]}]};S.videos.unshift(v)}
-v.groups[0].tasks.push({id:id(),n:n,y:document.getElementById("ay").value,m:+document.getElementById("am").value||30,done:0});cl()},
-end:function(){var L=lg(),s=st(),c=cur(),dl=c&&c.v.date?Math.ceil((new Date(c.v.date)-new Date(day()))/864e5):null,dh=S.honor-L.h;
-sheet('<h2>итоги дня</h2><div class="ln">сделано шагов: '+L.d+'</div><div class="ln">в работе: '+L.m+' мин</div><div class="ln">честь: '+(dh>0?"+":"")+dh+'</div><div class="ln">всего: '+s.d+' из '+s.a+' шагов</div>'+(dl!==null?'<div class="ln">до выхода: '+dl+' дн</div>':'')+'<button class="pill w" data-a="cl">закрыть</button>');return 1},
-cl:function(){cl();return 1}};
-document.addEventListener("click",function(e){var t=e.target.closest("[data-a]");if(!t)return;var a=t.dataset.a;if(a=="cl"&&e.target.closest(".si")&&!e.target.dataset.a)return;
-if(D[a]){var r=D[a](t);save();if(!r||a=="idea")R();if(r&&(a=="ia"||a=="id"||a=="nc"))R()}});
-setInterval(function(){var T=S.timer;if(!T||T.fin)return;if(T.end-Date.now()<=0){T.fin=1;save();R()}else{var el=document.getElementById("tm");if(el)el.textContent=mmss(T.end-Date.now())}},500);
-document.addEventListener("visibilitychange",function(){if(!document.hidden&&S.timer){if(!S.timer.fin&&S.timer.end<=Date.now())S.timer.fin=1;R()}});
-init();R();
-</script></body></html>
+try {
+  const savedTheme = JSON.parse(localStorage.getItem("sixteendope.planner.v1") || "null");
+  if (savedTheme && savedTheme.theme === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+    var darkMeta = document.getElementById("metaTheme");
+    if (darkMeta) darkMeta.setAttribute("content", "#efefeb");
+  }
+} catch (err) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+:root{
+  --font:"Inter Tight",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  --r-xl:34px; --r-lg:26px; --r-md:20px; --r-sm:15px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --neg:#c0255f;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --hero-scheme:light;
+  --bg:#070707; --bg-2:#0c0c0c;
+  --card:#151515; --card-hi:#1c1c1c; --card-line:rgba(255,255,255,.075);
+  --text:#f4f4f1; --muted:#90908c; --faint:#5f5f5c;
+  --pill:#f5f5f2; --pill-text:#0a0a0a; --pill-glow:rgba(255,255,255,.20);
+  --hero:#f3f3f0; --on-hero:#0b0b0b; --on-hero-muted:#65655f;
+  --hero-line:rgba(0,0,0,.10); --hero-field:rgba(0,0,0,.055);
+  --btn:#0b0b0b; --btn-text:#f7f7f4;
+  --glow:rgba(255,255,255,.12);
+  --shadow:0 30px 90px rgba(0,0,0,.6);
+  --track:rgba(255,255,255,.12);
+  --track-strong:rgba(255,255,255,.24);
+  --sheet:#f3f3f0;
+  --fab-bg:rgba(24,24,24,.82);
+  --knob-bg:#1b1b1b; --knob-ring:rgba(255,255,255,.82); --knob-star:#ffffff;
+  --tag:rgba(255,255,255,.07);
+  --scrim:rgba(0,0,0,.66);
+}
+html[data-theme="light"]{
+  color-scheme:light;
+  --hero-scheme:dark;
+  --bg:#efefeb; --bg-2:#e8e8e3;
+  --card:#e3e3dd; --card-hi:#dbdbd4; --card-line:rgba(0,0,0,.075);
+  --text:#101010; --muted:#6d6d67; --faint:#9a9a93;
+  --pill:#111110; --pill-text:#f7f7f4; --pill-glow:rgba(0,0,0,.18);
+  --hero:#101010; --on-hero:#f7f7f4; --on-hero-muted:#a0a09a;
+  --hero-line:rgba(255,255,255,.13); --hero-field:rgba(255,255,255,.075);
+  --btn:#f7f7f4; --btn-text:#0b0b0b;
+  --glow:rgba(0,0,0,.11);
+  --shadow:0 30px 80px rgba(0,0,0,.14);
+  --track:rgba(0,0,0,.13);
+  --track-strong:rgba(0,0,0,.26);
+  --sheet:#111110;
+  --fab-bg:rgba(250,250,247,.8);
+  --knob-bg:#141414; --knob-ring:rgba(255,255,255,.85); --knob-star:#ffffff;
+  --tag:rgba(0,0,0,.055);
+  --scrim:rgba(20,20,18,.42);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html{background:var(--bg);scroll-behavior:smooth}
+body{
+  margin:0; min-height:100dvh; background:var(--bg); color:var(--text);
+  font-family:"Inter Tight",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important; letter-spacing:-.025em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  padding:0; overflow-x:hidden;
+  transition:background-color .4s ease,color .4s ease;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(110% 55% at 50% -15%,var(--glow),transparent 65%);
+  opacity:.8;
+}
+body::after{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+h1,h2,h3,h4,p{margin:0}
+a{color:inherit}
+svg{display:block}
+.shell{
+  width:min(100%,672px); margin:0 auto; position:relative; z-index:2;
+  padding:calc(18px + env(safe-area-inset-top)) 18px calc(138px + env(safe-area-inset-bottom));
+}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px;padding-right:146px;min-height:42px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-mark{
+  width:40px;height:40px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;
+  background:var(--text);color:var(--bg);box-shadow:0 0 26px var(--glow);
+}
+.brand-mark svg{width:18px;height:18px}
+.brand-title{font-size:16px;font-weight:700;letter-spacing:-.04em;line-height:1.05;white-space:nowrap}
+.brand-sub{font-size:11px;color:var(--muted);font-weight:500;margin-top:4px;white-space:nowrap;letter-spacing:-.01em}
+.local-pill{
+  display:none;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--muted);
+  border:1px solid var(--card-line);border-radius:999px;padding:6px 10px;white-space:nowrap;
+}
+.local-dot{width:5px;height:5px;border-radius:50%;background:var(--text);box-shadow:0 0 8px var(--glow)}
+.fab-rail{
+  position:fixed;top:calc(16px + env(safe-area-inset-top));right:16px;z-index:60;
+  display:flex;align-items:center;gap:8px;
+}
+.fab{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;
+  background:var(--fab-bg);border:1px solid var(--card-line);color:var(--text);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  box-shadow:0 8px 24px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.07);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),background-color .3s;
+}
+.fab svg{width:18px;height:18px}
+.fab-primary{background:var(--pill);color:var(--pill-text);border-color:transparent;box-shadow:0 0 24px var(--pill-glow)}
+.fab:active{transform:scale(.92)}
+@media(hover:hover){.fab:hover{transform:translateY(-2px);box-shadow:0 0 30px var(--glow)}}
+.theme-fab .semi{
+  width:19px;height:21px;border-radius:100% 0 0 100%;
+  background:linear-gradient(180deg,var(--text) 0 50%,transparent 50% 100%);
+  border:1.5px solid var(--text);border-right:0;
+  transform:rotate(-18deg);transition:transform .55s var(--ease),background .4s;
+}
+html[data-theme="light"] .theme-fab .semi{transform:rotate(162deg)}
+.honor-card{
+  border-radius:var(--r-lg);background:
+    radial-gradient(120% 140% at 12% -20%,var(--card-hi),transparent 60%),var(--card);
+  border:1px solid var(--card-line);padding:17px 18px 14px;margin-bottom:16px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  overflow:hidden;position:relative;
+}
+.honor-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px;gap:10px}
+.honor-label{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:-.01em}
+.honor-label .tiny-star{width:13px;height:13px;color:var(--muted)}
+.honor-state{color:var(--muted);font-weight:500;font-size:11px}
+.honor-number{display:flex;align-items:baseline;gap:8px}
+.honor-value{font-size:19px;font-weight:700;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.honor-delta{
+  font-size:10px;font-weight:650;padding:4px 7px;border-radius:999px;background:var(--tag);
+  color:var(--muted);font-variant-numeric:tabular-nums;min-width:28px;text-align:center;
+}
+.honor-delta.is-up{color:var(--text);box-shadow:0 0 14px rgba(255,255,255,.07)}
+.honor-delta.is-down{color:var(--neg);background:rgba(192,37,95,.12)}
+.honor-track-wrap{padding:7px 4px 2px}
+.honor-track{
+  position:relative;height:5px;border-radius:999px;background:var(--track);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.18);
+}
+.honor-track::before{
+  content:"";position:absolute;inset:0;border-radius:999px;
+  background-image:repeating-linear-gradient(90deg,transparent 0,transparent calc(10% - 1px),rgba(255,255,255,.14) calc(10% - 1px),rgba(255,255,255,.14) 10%);
+  opacity:.55;
+}
+.honor-fill{
+  position:absolute;left:0;top:0;bottom:0;border-radius:999px;width:60%;
+  background:linear-gradient(90deg,var(--track-strong),var(--text));
+  box-shadow:0 0 16px var(--glow);transition:width .8s var(--ease),background .4s;
+}
+.honor-knob{
+  position:absolute;top:50%;left:60%;transform:translate(-50%,-50%);
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:var(--knob-bg);color:var(--knob-star);
+  border:1.5px solid var(--knob-ring);
+  box-shadow:0 0 0 4px rgba(0,0,0,.16),0 0 24px var(--glow),inset 0 1px 0 rgba(255,255,255,.16);
+  transition:left .8s var(--ease),color .35s,border-color .35s,box-shadow .35s;
+}
+.honor-knob svg{width:15px;height:15px;filter:drop-shadow(0 0 5px rgba(255,255,255,.35))}
+.honor-card.is-down .honor-knob{border-color:rgba(192,37,95,.85);box-shadow:0 0 0 4px rgba(192,37,95,.09),0 0 22px rgba(192,37,95,.24)}
+.honor-card.is-down .honor-knob svg{filter:drop-shadow(0 0 6px rgba(192,37,95,.5))}
+.honor-card.is-down .honor-fill{background:linear-gradient(90deg,var(--track-strong),#7d2547);box-shadow:0 0 16px rgba(192,37,95,.18)}
+.honor-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:9px;color:var(--faint);font-weight:500;letter-spacing:.01em}
+.honor-foot span:nth-child(2){opacity:.85}
+.pills{
+  display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:none;
+  margin:0 -2px 18px;padding:2px;position:relative;z-index:3;
+}
+.pills::-webkit-scrollbar{display:none}
+.pill-switch{
+  flex:0 0 auto;border-radius:999px;border:1px solid var(--card-line);
+  background:transparent;color:var(--muted);font-size:12px;font-weight:600;
+  padding:9px 14px;letter-spacing:-.015em;transition:all .3s var(--ease);white-space:nowrap;
+}
+.pill-switch .count{opacity:.55;margin-left:4px;font-variant-numeric:tabular-nums}
+.pill-switch:hover{color:var(--text);border-color:var(--track-strong)}
+.pill-switch.active{
+  background:var(--pill);color:var(--pill-text);border-color:transparent;
+  box-shadow:0 0 22px var(--pill-glow);transform:translateY(-1px);
+}
+.view{display:block;animation:rise .4s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.hero{
+  color-scheme:var(--hero-scheme);
+  position:relative;overflow:hidden;background:var(--hero);color:var(--on-hero);
+  border-radius:var(--r-xl);padding:22px;margin-bottom:14px;
+  box-shadow:var(--shadow),0 0 55px var(--glow);
+  border:1px solid rgba(255,255,255,.035);
+}
+.hero::before{
+  content:"";position:absolute;width:260px;height:260px;right:-110px;top:-130px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.55),transparent 68%);opacity:.18;pointer-events:none;
+}
+html[data-theme="light"] .hero::before{background:radial-gradient(circle,rgba(255,255,255,.28),transparent 68%);opacity:.16}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative;z-index:1}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:6px 9px;
+  background:var(--tag);color:var(--muted);font-size:10px;font-weight:600;letter-spacing:0;white-space:nowrap;
+}
+.hero .tag{background:var(--hero-field);color:var(--on-hero-muted)}
+.hero .tag.solid{background:var(--on-hero);color:var(--hero)}
+.tag svg{width:11px;height:11px}
+.hero-index{
+  font-size:11px;font-weight:600;color:var(--on-hero-muted);font-variant-numeric:tabular-nums;
+  display:flex;align-items:center;gap:5px;flex:0 0 auto;
+}
+.hero-index svg{width:12px;height:12px}
+.hero-main{margin-top:22px;position:relative;z-index:1;display:flex;gap:14px;align-items:flex-start;justify-content:space-between}
+.hero-copy{min-width:0;flex:1}
+.hero-eyebrow{font-size:10px;font-weight:600;color:var(--on-hero-muted);letter-spacing:-.005em;margin-bottom:8px}
+.hero h1{
+  font-size:clamp(31px,7.6vw,42px);font-weight:760;line-height:.99;letter-spacing:-.052em;
+  text-wrap:balance;word-break:break-word;
+}
+.hero-note{font-size:12.5px;line-height:1.42;color:var(--on-hero-muted);margin-top:11px;max-width:420px;font-weight:500}
+.hero-star{
+  width:52px;height:52px;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;
+  background:var(--btn);color:var(--btn-text);box-shadow:0 0 0 1px rgba(0,0,0,.05),0 8px 26px rgba(0,0,0,.18);
+  margin-top:2px;transform:rotate(-4deg);
+}
+.hero-star svg{width:22px;height:22px;filter:drop-shadow(0 0 7px rgba(255,255,255,.25))}
+.hero-progress{margin-top:20px;position:relative;z-index:1}
+.hero-progress-head{display:flex;justify-content:space-between;font-size:10px;font-weight:600;color:var(--on-hero-muted);margin-bottom:7px}
+.hero-progress-head b{font-weight:650;color:var(--on-hero)}
+.hero-progress-track{height:4px;border-radius:999px;background:var(--hero-line);overflow:hidden}
+.hero-progress-fill{height:100%;border-radius:999px;background:var(--on-hero);box-shadow:0 0 12px rgba(0,0,0,.16);transition:width .7s var(--ease)}
+.hero-actions{display:flex;gap:8px;margin-top:18px;position:relative;z-index:1}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;height:50px;
+  padding:0 19px;border-radius:999px;font-size:13.5px;font-weight:650;letter-spacing:-.015em;
+  transition:transform .25s var(--ease),box-shadow .25s,opacity .2s,background-color .3s;white-space:nowrap;
+}
+.btn:active{transform:scale(.975)}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--btn);color:var(--btn-text);box-shadow:0 0 30px rgba(255,255,255,.14);flex:1}
+.btn-primary:hover{box-shadow:0 0 38px rgba(255,255,255,.2)}
+.btn-quiet{background:var(--hero-field);color:var(--on-hero);flex:0 0 auto}
+.btn-quiet svg{width:15px;height:15px}
+.btn-ghost-light{background:var(--tag);color:var(--text)}
+.btn-dark{background:var(--pill);color:var(--pill-text);box-shadow:0 0 24px var(--pill-glow)}
+.hero-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;position:relative;z-index:1}
+.text-link{
+  display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--on-hero-muted);
+  padding:5px 0;transition:color .2s;
+}
+.text-link:hover{color:var(--on-hero)}
+.text-link svg{width:12px;height:12px}
+.text-link.negative:hover{color:var(--neg)}
+.timer-block{
+  margin-top:18px;padding:15px 16px;border-radius:var(--r-md);background:var(--hero-field);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:1;
+  border:1px solid var(--hero-line);
+}
+.timer-clock{font-size:31px;font-weight:730;letter-spacing:-.055em;line-height:1;font-variant-numeric:tabular-nums}
+.timer-sub{font-size:10px;font-weight:550;color:var(--on-hero-muted);margin-top:6px;display:flex;align-items:center;gap:5px}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--on-hero);animation:pulseDot 1.8s infinite}
+@keyframes pulseDot{0%,100%{opacity:.35;transform:scale(.9)}50%{opacity:1;transform:scale(1.15)}}
+.timer-controls{display:flex;gap:5px}
+.timer-adjust{
+  height:33px;min-width:39px;border-radius:999px;background:var(--hero);border:1px solid var(--hero-line);
+  font-size:11px;font-weight:650;display:grid;place-items:center;color:var(--on-hero);
+  transition:transform .2s;
+}
+.timer-adjust:active{transform:scale(.94)}
+.hero-empty{text-align:left;padding:7px 2px 3px}
+.hero-empty .hero-star{margin-bottom:18px;transform:none;width:58px;height:58px}
+.hero-empty h1{font-size:clamp(32px,8vw,46px)}
+.hero-empty p{font-size:13px;color:var(--on-hero-muted);margin-top:11px;max-width:340px;line-height:1.45}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.stat{
+  background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-md);
+  padding:14px 12px 12px;min-width:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+  transition:background-color .35s,border-color .35s;
+}
+.stat-label{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:600;color:var(--muted);white-space:nowrap}
+.stat-label svg{width:10px;height:10px;opacity:.8}
+.stat-value{display:flex;align-items:baseline;gap:4px;margin-top:10px;line-height:1}
+.stat-value strong{font-size:22px;font-weight:720;letter-spacing:-.055em;font-variant-numeric:tabular-nums}
+.stat-value span{font-size:9px;color:var(--faint);font-weight:500;white-space:nowrap}
+.today-tools{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:14px}
+.day-close-card{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;
+  background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-md);
+  padding:15px 16px;width:100%;transition:border-color .25s,background .3s;
+}
+.day-close-card:hover{border-color:var(--track-strong)}
+.day-close-card h3{font-size:13.5px;font-weight:650;letter-spacing:-.02em}
+.day-close-card p{font-size:10.5px;color:var(--muted);margin-top:3px;font-weight:500}
+.round-arrow{
+  width:34px;height:34px;border-radius:50%;background:var(--pill);color:var(--pill-text);
+  display:grid;place-items:center;flex:0 0 auto;box-shadow:0 0 18px var(--pill-glow);
+}
+.round-arrow svg{width:14px;height:14px}
+.quick-idea{
+  background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-lg);
+  padding:15px 16px;margin-bottom:8px;
+}
+.quick-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.quick-title{font-size:11px;font-weight:630;display:flex;align-items:center;gap:6px}
+.quick-title svg{width:13px;height:13px;color:var(--muted)}
+.quick-count{font-size:9px;color:var(--faint);font-variant-numeric:tabular-nums}
+.quick-form{display:flex;align-items:center;gap:7px}
+.quick-input{
+  flex:1;min-width:0;height:40px;background:var(--bg-2);border:1px solid var(--card-line);
+  border-radius:999px;padding:0 14px;font-size:12px;color:var(--text);outline:none;
+  transition:border-color .2s,box-shadow .2s;letter-spacing:-.01em;
+}
+.quick-input::placeholder{color:var(--faint)}
+.quick-input:focus{border-color:var(--track-strong);box-shadow:0 0 0 3px var(--tag)}
+.quick-save{
+  width:40px;height:40px;border-radius:50%;background:var(--pill);color:var(--pill-text);
+  display:grid;place-items:center;flex:0 0 auto;box-shadow:0 0 18px var(--pill-glow);
+  transition:transform .2s;
+}
+.quick-save:active{transform:scale(.93)}
+.quick-save svg{width:16px;height:16px}
+.section-title-row{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:26px 2px 13px}
+.section-kicker{font-size:9px;font-weight:650;color:var(--muted);letter-spacing:.06em;margin-bottom:6px}
+.section-title{font-size:25px;font-weight:730;letter-spacing:-.05em;line-height:1.03}
+.section-caption{font-size:10.5px;color:var(--muted);font-weight:500;max-width:150px;text-align:right;line-height:1.35}
+.section-actions{display:flex;align-items:center;gap:6px}
+.icon-btn{
+  width:34px;height:34px;border-radius:50%;background:var(--card);border:1px solid var(--card-line);
+  display:grid;place-items:center;color:var(--text);transition:transform .2s,background-color .25s;
+}
+.icon-btn:hover{background:var(--card-hi)}
+.icon-btn:active{transform:scale(.93)}
+.icon-btn svg{width:15px;height:15px}
+.filter-row{display:flex;gap:6px;margin-bottom:13px;overflow-x:auto;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.filter-pill{
+  flex:0 0 auto;padding:8px 12px;border-radius:999px;border:1px solid var(--card-line);
+  background:transparent;color:var(--muted);font-size:10.5px;font-weight:600;
+  transition:all .25s var(--ease);white-space:nowrap;
+}
+.filter-pill.active{background:var(--pill);color:var(--pill-text);border-color:transparent;box-shadow:0 0 18px var(--pill-glow)}
+.task-list{display:flex;flex-direction:column;gap:9px}
+.task-card{
+  background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-lg);
+  padding:16px;position:relative;overflow:hidden;
+  transition:background-color .3s,border-color .3s;
+  animation:rise .32s var(--ease) both;
+}
+.task-card.current{border-color:var(--track-strong);background:linear-gradient(160deg,var(--card-hi),var(--card))}
+.task-card.is-done{opacity:.7}
+.task-card.is-done.current{opacity:1}
+.task-topline{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.task-topline-left{display:flex;align-items:center;gap:6px;min-width:0;flex-wrap:wrap}
+.task-count{font-size:9.5px;font-weight:600;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.task-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-top:11px}
+.task-title{
+  font-size:17px;font-weight:680;letter-spacing:-.035em;line-height:1.12;text-align:left;
+  display:flex;align-items:center;gap:7px;color:var(--text);padding:0;flex:1;min-width:0;
+}
+.task-title span{min-width:0;word-break:break-word}
+.task-title svg{width:14px;height:14px;flex:0 0 auto;color:var(--muted)}
+.task-title svg:last-child{margin-left:auto}
+.task-card.is-done .task-title{color:var(--muted)}
+.task-note{font-size:10.5px;line-height:1.4;color:var(--muted);margin-top:5px;font-weight:500}
+.task-progress{margin-top:13px;display:flex;align-items:center;gap:9px}
+.progress-track{height:4px;border-radius:999px;background:var(--track);flex:1;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px;background:var(--text);opacity:.85;transition:width .6s var(--ease)}
+.task-pct{font-size:9px;color:var(--faint);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.steps-wrap{max-height:1800px;overflow:hidden;opacity:1;transition:max-height .45s var(--ease),opacity .3s var(--ease)}
+.task-card.collapsed .steps-wrap{max-height:0;opacity:0}
+.steps-inner{padding-top:7px}
+.step-row{display:flex;align-items:flex-start;gap:9px;padding:9px 0 9px;border-top:1px solid var(--card-line)}
+.step-row:first-child{border-top:0}
+.step-row.done{opacity:.56}
+.step-check{
+  width:21px;height:21px;border-radius:50%;border:1.3px solid var(--faint);flex:0 0 auto;
+  display:grid;place-items:center;margin-top:1px;transition:all .22s var(--ease);color:var(--card);
+}
+.step-check:hover{border-color:var(--text)}
+.step-row.done .step-check{background:var(--text);border-color:var(--text);color:var(--card)}
+.step-check svg{width:11px;height:11px}
+.step-main{flex:1;min-width:0}
+.step-title{font-size:11.5px;font-weight:550;line-height:1.32;word-break:break-word;letter-spacing:-.015em}
+.step-row.done .step-title{text-decoration:line-through;text-decoration-thickness:1px;color:var(--muted)}
+.step-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.step-tag{font-size:8.5px;font-weight:600;color:var(--muted);background:var(--tag);border-radius:999px;padding:3px 6px;display:inline-flex;align-items:center;gap:3px}
+.step-tag svg{width:9px;height:9px}
+.step-action{
+  flex:0 0 auto;min-width:29px;height:29px;padding:0 9px;border-radius:999px;
+  border:1px solid var(--card-line);background:transparent;color:var(--text);
+  font-size:9.5px;font-weight:650;display:grid;place-items:center;transition:all .22s;
+}
+.step-action svg{width:12px;height:12px}
+.step-action:hover{background:var(--pill);color:var(--pill-text);border-color:transparent}
+.step-row.current-step .step-title{color:var(--text);font-weight:650}
+.step-row.current-step::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--text);box-shadow:0 0 8px var(--glow);align-self:center;flex:0 0 auto;margin-left:-13px}
+.task-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:11px;padding-top:11px;border-top:1px solid var(--card-line)}
+.task-foot-meta{font-size:9px;color:var(--faint);font-weight:500;display:flex;align-items:center;gap:5px}
+.task-foot-meta svg{width:10px;height:10px}
+.mini-btn{
+  display:inline-flex;align-items:center;gap:5px;padding:7px 11px;border-radius:999px;
+  background:var(--pill);color:var(--pill-text);font-size:9.5px;font-weight:650;
+  box-shadow:0 0 16px var(--pill-glow);transition:transform .2s;
+}
+.mini-btn:active{transform:scale(.95)}
+.mini-btn svg{width:11px;height:11px}
+.mini-btn.ghost{background:var(--tag);color:var(--muted);box-shadow:none}
+.empty-card{
+  background:var(--card);border:1px dashed var(--track-strong);border-radius:var(--r-lg);
+  padding:28px 20px;text-align:center;
+}
+.empty-card .hero-star{margin:0 auto 14px;width:44px;height:44px;background:var(--pill);color:var(--pill-text);transform:none}
+.empty-card h3{font-size:16px;font-weight:680;letter-spacing:-.035em}
+.empty-card p{font-size:11px;color:var(--muted);line-height:1.45;max-width:280px;margin:7px auto 0}
+.project-card{
+  background:radial-gradient(100% 140% at 100% 0%,var(--card-hi),transparent 60%),var(--card);
+  border:1px solid var(--card-line);border-radius:var(--r-xl);padding:20px;margin-bottom:15px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
+.project-kicker{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
+.project-title{font-size:clamp(24px,6.1vw,32px);font-weight:740;line-height:1.02;letter-spacing:-.052em;text-wrap:balance;overflow-wrap:anywhere}
+.project-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.project-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.project-card .hero-progress-head b{color:var(--text)!important}
+.timeline{display:flex;flex-direction:column;gap:8px}
+.day-card{
+  background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-md);
+  padding:13px 14px;transition:background-color .3s,border-color .3s;
+}
+.day-card.today{background:var(--card-hi);border-color:var(--track-strong)}
+.day-card.past-faint{opacity:.7}
+.day-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:9px}
+.day-head-left{display:flex;align-items:center;gap:7px;min-width:0}
+.day-name{font-size:10px;font-weight:650;white-space:nowrap}
+.day-date{font-size:9.5px;color:var(--muted);font-weight:500;white-space:nowrap}
+.day-count{font-size:8.5px;color:var(--faint);border:1px solid var(--card-line);padding:3px 7px;border-radius:999px;white-space:nowrap}
+.day-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--card-line)}
+.day-item-main{flex:1;min-width:0}
+.day-item-title{font-size:11px;font-weight:550;line-height:1.3;letter-spacing:-.01em}
+.day-item-meta{font-size:8.5px;color:var(--faint);margin-top:3px;display:flex;gap:5px;flex-wrap:wrap}
+.day-play{
+  width:27px;height:27px;border-radius:50%;border:1px solid var(--card-line);display:grid;place-items:center;
+  flex:0 0 auto;color:var(--text);transition:all .2s;
+}
+.day-play:hover{background:var(--pill);color:var(--pill-text);border-color:transparent}
+.day-play svg{width:11px;height:11px}
+.day-play.done{background:var(--tag);color:var(--muted);border-color:transparent}
+.reset-line{margin-top:18px;display:flex;justify-content:center}
+.tiny-link{font-size:9.5px;color:var(--faint);font-weight:500;padding:5px 8px;transition:color .2s}
+.tiny-link:hover{color:var(--text)}
+.idea-list{display:flex;flex-direction:column;gap:7px;margin-top:9px}
+.idea-card{
+  background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-md);
+  padding:13px 14px;display:flex;align-items:flex-start;gap:10px;
+  transition:background-color .3s,border-color .3s;animation:rise .3s var(--ease) both;
+}
+.idea-card:hover{border-color:var(--track-strong)}
+.idea-star{width:27px;height:27px;border-radius:50%;flex:0 0 auto;background:var(--tag);display:grid;place-items:center;color:var(--muted);margin-top:1px}
+.idea-star svg{width:12px;height:12px}
+.idea-main{flex:1;min-width:0}
+.idea-text{font-size:12px;line-height:1.4;font-weight:520;word-break:break-word;letter-spacing:-.015em}
+.idea-meta{display:flex;align-items:center;gap:8px;margin-top:6px}
+.idea-date{font-size:8.5px;color:var(--faint)}
+.idea-use{font-size:8.5px;color:var(--muted);font-weight:600;border-bottom:1px solid transparent}
+.idea-use:hover{color:var(--text);border-color:var(--text)}
+.idea-del{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;color:var(--faint);flex:0 0 auto;transition:color .2s,background .2s}
+.idea-del:hover{color:var(--neg);background:rgba(192,37,95,.09)}
+.idea-del svg{width:12px;height:12px}
+.small-note{font-size:9.5px;line-height:1.45;color:var(--faint);font-weight:500;text-align:center;margin:14px auto 0;max-width:340px}
+.error-text{font-size:10px;color:var(--neg);margin-top:7px;font-weight:550;display:none}
+.error-text.show{display:block}
+footer{
+  text-align:center;margin-top:38px;padding-top:20px;border-top:1px solid var(--card-line);
+  display:flex;flex-direction:column;align-items:center;gap:7px;position:relative;z-index:2;
+}
+.copy{font-size:10px;font-weight:550;color:var(--faint);letter-spacing:.01em}
+.foot-note{font-size:8.5px;color:var(--faint);opacity:.75}
+.reset-data{font-size:8.5px;color:var(--faint);opacity:.55;padding:3px;transition:opacity .2s}
+.reset-data:hover{opacity:1;color:var(--neg)}
+.mini-timer{
+  position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
+  z-index:70;width:min(calc(100% - 32px),380px);border-radius:999px;padding:8px 9px 8px 14px;
+  background:var(--fab-bg);border:1px solid var(--track-strong);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);
+  box-shadow:0 16px 50px rgba(0,0,0,.35),0 0 30px var(--glow);
+  display:flex;align-items:center;gap:10px;animation:timerIn .4s var(--ease) both;
+}
+@keyframes timerIn{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+.mini-timer .live-dot{background:var(--text);flex:0 0 auto}
+.mini-timer-copy{min-width:0;flex:1}
+.mini-timer-time{font-size:15px;font-weight:720;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1}
+.mini-timer-label{font-size:8.5px;color:var(--muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:210px}
+.mini-timer-btn{
+  width:35px;height:35px;border-radius:50%;background:var(--pill);color:var(--pill-text);display:grid;place-items:center;
+  flex:0 0 auto;box-shadow:0 0 16px var(--pill-glow);
+}
+.mini-timer-btn svg{width:14px;height:14px}
+.mini-timer-btn.ghost{background:var(--tag);color:var(--muted);box-shadow:none}
+.modal-root{position:fixed;inset:0;z-index:100}
+.modal-backdrop{
+  position:absolute;inset:0;background:var(--scrim);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  display:flex;align-items:flex-end;justify-content:center;padding:0;animation:backIn .25s ease both;
+  overflow-y:auto;
+}
+html[data-theme="light"] .modal-backdrop{background:rgba(20,20,18,.4)}
+@keyframes backIn{from{opacity:0}to{opacity:1}}
+.sheet{
+  color-scheme:var(--hero-scheme);
+  width:100%;max-width:500px;background:var(--sheet);color:var(--on-hero);
+  border-radius:30px 30px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom));
+  box-shadow:0 -20px 80px rgba(0,0,0,.4);animation:sheetIn .38s var(--ease) both;
+  max-height:92dvh;overflow-y:auto;
+  border:1px solid rgba(255,255,255,.06);border-bottom:0;
+}
+html[data-theme="light"] .sheet{background:var(--sheet);color:var(--on-hero)}
+@keyframes sheetIn{from{transform:translateY(40px);opacity:.5}to{transform:none;opacity:1}}
+.sheet-handle{width:34px;height:4px;border-radius:99px;background:var(--hero-line);margin:-7px auto 17px}
+.sheet-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+.sheet-kicker{font-size:9px;font-weight:650;color:var(--on-hero-muted);letter-spacing:.06em;margin-bottom:6px}
+.sheet-title{font-size:23px;font-weight:740;line-height:1.05;letter-spacing:-.05em}
+.sheet-close{
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--hero-line);display:grid;place-items:center;
+  color:var(--on-hero-muted);flex:0 0 auto;transition:background .2s;
+}
+.sheet-close:hover{background:var(--hero-field);color:var(--on-hero)}
+.sheet-close svg{width:14px;height:14px}
+.field{margin-bottom:13px}
+.field-label{display:block;font-size:9px;font-weight:650;color:var(--on-hero-muted);margin-bottom:6px;letter-spacing:.01em}
+.field-input,.field-textarea,.field-select{
+  width:100%;background:var(--hero-field);border:1px solid var(--hero-line);border-radius:14px;
+  padding:12px 13px;font-size:13px;font-weight:500;color:var(--on-hero);outline:none;letter-spacing:-.015em;
+  transition:border-color .2s,box-shadow .2s;appearance:none;
+}
+.field-input::placeholder,.field-textarea::placeholder{color:var(--on-hero-muted);opacity:.7}
+.field-input:focus,.field-textarea:focus,.field-select:focus{border-color:var(--on-hero-muted);box-shadow:0 0 0 3px var(--hero-field)}
+.field-textarea{resize:vertical;min-height:78px;line-height:1.45}
+.field-row{display:flex;gap:8px}
+.field-row .field{flex:1;min-width:0}
+.type-row{display:flex;gap:5px;flex-wrap:wrap}
+.type-pill{
+  flex:1;min-width:0;padding:9px 7px;border-radius:999px;border:1px solid var(--hero-line);
+  font-size:10px;font-weight:600;color:var(--on-hero-muted);background:transparent;transition:all .2s;text-align:center;white-space:nowrap;
+}
+.type-pill.active{background:var(--on-hero);color:var(--hero);border-color:transparent}
+.sheet-actions{display:flex;gap:7px;margin-top:18px}
+.sheet-actions .btn{flex:1;height:46px;font-size:12.5px}
+.sheet .btn-primary{background:var(--btn);color:var(--btn-text)}
+.sheet .btn-secondary{background:var(--hero-field);color:var(--on-hero)}
+.sheet .btn-danger{background:rgba(192,37,95,.12);color:var(--neg);flex:0 0 auto;padding:0 15px}
+.sheet-note{font-size:10px;line-height:1.45;color:var(--on-hero-muted);margin-top:10px;text-align:center}
+.sheet-divider{height:1px;background:var(--hero-line);margin:16px 0}
+.summary-hero{margin-bottom:15px}
+.summary-big{font-size:41px;font-weight:760;letter-spacing:-.06em;line-height:1}
+.summary-caption{font-size:10px;font-weight:600;color:var(--on-hero-muted);margin-top:6px}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:14px}
+.summary-cell{background:var(--hero-field);border-radius:15px;padding:11px 12px;border:1px solid var(--hero-line)}
+.summary-cell small{display:block;font-size:8.5px;font-weight:600;color:var(--on-hero-muted);margin-bottom:5px}
+.summary-cell strong{font-size:17px;font-weight:720;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.summary-cell em{font-size:9px;font-style:normal;color:var(--on-hero-muted);font-weight:500;margin-left:3px}
+.done-mini-list{margin-top:13px;max-height:130px;overflow-y:auto}
+.done-mini-row{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:7px 0;border-top:1px solid var(--hero-line);font-size:10.5px}
+.done-mini-row:first-child{border-top:0}
+.done-mini-row span:last-child{color:var(--on-hero-muted);font-size:9px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.break-time{font-size:52px;font-weight:760;letter-spacing:-.065em;line-height:1;text-align:center;margin:16px 0 5px;font-variant-numeric:tabular-nums}
+.break-caption{font-size:10.5px;color:var(--on-hero-muted);text-align:center;margin-bottom:14px}
+.toast-root{position:fixed;left:0;right:0;bottom:calc(78px + env(safe-area-inset-bottom));z-index:120;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:7px;padding:0 16px}
+.toast{
+  pointer-events:auto;max-width:min(92vw,390px);background:var(--pill);color:var(--pill-text);
+  border-radius:999px;padding:10px 15px;font-size:10.5px;font-weight:550;line-height:1.35;
+  box-shadow:0 10px 30px rgba(0,0,0,.28),0 0 24px var(--pill-glow);text-align:center;
+  animation:toastIn .35s var(--ease) both;
+}
+.toast.out{animation:toastOut .3s ease both}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateY(7px) scale(.98)}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(hover:hover){
+  .task-card:hover{border-color:var(--card-line)}
+  .task-card.current:hover{border-color:var(--track-strong)}
+}
+@media(max-width:480px){
+  .shell{padding-left:14px;padding-right:14px}
+  .fab-rail{right:12px;top:calc(13px + env(safe-area-inset-top));gap:6px}
+  .fab{width:39px;height:39px}
+  .fab svg{width:16px;height:16px}
+  .theme-fab .semi{width:17px;height:19px}
+  .topbar{padding-right:130px;margin-bottom:16px;min-height:38px}
+  .brand-mark{width:36px;height:36px}
+  .brand-title{font-size:14.5px}
+  .brand-sub{font-size:9.5px;margin-top:3px}
+  .honor-card{padding:15px 15px 12px;border-radius:23px}
+  .hero{padding:18px;border-radius:28px}
+  .hero-main{margin-top:18px;gap:9px}
+  .hero-star{width:44px;height:44px}
+  .hero-star svg{width:19px;height:19px}
+  .hero-note{font-size:11.5px}
+  .hero h1{font-size:clamp(29px,8.4vw,36px)}
+  .timer-block{padding:13px}
+  .timer-clock{font-size:27px}
+  .timer-adjust{height:30px;min-width:35px;font-size:10px}
+  .btn{height:47px;padding:0 15px;font-size:12.5px}
+  .stat{padding:12px 10px 10px}
+  .stat-value strong{font-size:19px}
+  .stat-label{font-size:8.5px}
+  .section-title{font-size:23px}
+  .task-card{padding:14px;border-radius:22px}
+  .task-title{font-size:15.5px}
+  .project-card{padding:17px;border-radius:28px}
+  .project-title{font-size:23px}
+  .pills{margin-bottom:14px}
+  .pill-switch{font-size:11px;padding:8px 12px}
+  .sheet{border-radius:27px 27px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom))}
+  .sheet-title{font-size:21px}
+  .summary-grid{gap:5px}
+  .toast-root{bottom:calc(74px + env(safe-area-inset-bottom))}
+  .field-input,.field-textarea,.field-select,.quick-input{font-size:16px}
+  .field-input{padding:11px 12px}
+  .quick-input{height:42px}
+}
+@media(max-width:360px){
+  .topbar{padding-right:126px}
+  .brand-title{font-size:13.5px}
+  .fab{width:36px;height:36px}
+  .fab-rail{gap:5px;right:10px}
+  .hero-star{display:none}
+  .honor-state{display:none}
+  .stats-grid{gap:6px}
+  .stat-value strong{font-size:17px}
+  .stat-value span{font-size:8px}
+}
+@media(min-width:900px){
+  .shell{padding-top:26px}
+  .fab-rail{top:24px;right:26px}
+  .modal-backdrop{align-items:center;padding:24px}
+  .sheet{border-radius:30px;max-height:88dvh;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.06);animation:modalIn .32s var(--ease) both}
+  @keyframes modalIn{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+  .toast-root{bottom:30px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.83 6.28 6.67.62-5.02 4.52 1.48 6.58L12 17.02 6.04 20.5l1.48-6.58L2.5 9.4l6.67-.62z" fill="currentColor"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M8.2 14.8a6 6 0 1111.6 0c-.7 1.2-1.8 2-1.8 3.2H8c0-1.2-1.1-2-1.8-3.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5l11 6.5-11 6.5z" fill="currentColor"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3v10H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 3.5v4M16 3.5v4M4 10h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="18.5" cy="12" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4.8h6V7M7 7l1 12.2h8L17 7M10 10.5v5.5M14 10.5v5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19 8.5A7.5 7.5 0 105 9M19 4.5V9h-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4.5 19.5l4.3-1L19 8.2 15.8 5 5.6 15.2zM14 7l3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5.5v13M15 5.5v13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-helper" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.8 19c.4-3.3 2.4-5 5.2-5s4.8 1.7 5.2 5M16 8.5h4M18 6.5v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-weather" viewBox="0 0 24 24"><circle cx="8" cy="8" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 2.8v1.5M8 11.7v1.5M2.8 8h1.5M11.7 8h1.5M4.3 4.3l1 1M10.7 10.7l1 1M11.7 4.3l-1 1M5.3 10.7l-1 1M14 17.5h6M15.5 14.5h4a2.2 2.2 0 010 4.4h-4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.5l8.5 4.5L12 12.5 3.5 8zM3.5 12L12 16.5 20.5 12M3.5 16L12 20.5 20.5 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6.5h12M8 12h12M8 17.5h12M4 6.5h.01M4 12h.01M4 17.5h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="fab-rail" aria-label="быстрые действия">
+  <button class="fab theme-fab" id="fabTheme" aria-label="сменить тему" title="сменить тему"><span class="semi" aria-hidden="true"></span></button>
+  <button class="fab" id="fabIdea" aria-label="записать идею" title="записать идею"><svg><use href="#i-bulb"/></svg></button>
+  <button class="fab fab-primary" id="fabAdd" aria-label="добавить задачу" title="добавить задачу"><svg><use href="#i-plus"/></svg></button>
+</div>
+
+<div class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark"><svg><use href="#i-star"/></svg></div>
+      <div>
+        <p class="brand-title">планер ютуба</p>
+        <p class="brand-sub" id="headerDate">сегодня</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="honor-card" id="honorCard" aria-label="шкала чести">
+    <div class="honor-head">
+      <div class="honor-label">
+        <svg class="tiny-star"><use href="#i-star"/></svg>
+        <span>честь</span>
+        <span class="honor-state" id="honorState">ровно</span>
+      </div>
+      <div class="honor-number">
+        <span class="honor-value" id="honorValue">66</span>
+        <span class="honor-delta" id="honorDelta">+0</span>
+      </div>
+    </div>
+    <div class="honor-track-wrap">
+      <div class="honor-track" id="honorTrack" role="progressbar" aria-label="честь" aria-valuemin="0" aria-valuemax="100" aria-valuenow="66">
+        <div class="honor-fill" id="honorFill"></div>
+        <div class="honor-knob" id="honorKnob"><svg><use href="#i-star"/></svg></div>
+      </div>
+    </div>
+    <div class="honor-foot">
+      <span>низкая</span>
+      <span>растёт от шагов и дней</span>
+      <span>высокая</span>
+    </div>
+  </section>
+
+  <nav class="pills" aria-label="разделы">
+    <button class="pill-switch active" data-nav="today" aria-current="page">сегодня</button>
+    <button class="pill-switch" data-nav="tasks">все задачи</button>
+    <button class="pill-switch" data-nav="video">план видео</button>
+    <button class="pill-switch" data-nav="ideas">идеи <span class="count" id="ideasNavCount">2</span></button>
+  </nav>
+
+  <main>
+    <section class="view" id="view-today" data-view="today">
+      <div id="heroMount"></div>
+      <div class="stats-grid" id="statsMount"></div>
+      <div class="today-tools">
+        <button class="day-close-card" id="endDayBtn">
+          <div>
+            <h3>завершить день</h3>
+            <p id="endDayHint">итоги, время и честь</p>
+          </div>
+          <span class="round-arrow"><svg><use href="#i-arrow"/></svg></span>
+        </button>
+      </div>
+      <div class="quick-idea">
+        <div class="quick-head">
+          <span class="quick-title"><svg><use href="#i-bulb"/></svg> быстрая запись идеи</span>
+          <span class="quick-count" id="quickIdeaCount">2 идеи</span>
+        </div>
+        <form class="quick-form" id="quickIdeaForm">
+          <input class="quick-input" id="quickIdeaInput" type="text" maxlength="240" autocomplete="off" placeholder="идея для видео..." aria-label="идея для видео">
+          <button class="quick-save" type="submit" aria-label="сохранить идею"><svg><use href="#i-arrow-up"/></svg></button>
+        </form>
+      </div>
+    </section>
+
+    <section class="view" id="view-tasks" data-view="tasks" hidden>
+      <div class="section-title-row">
+        <div>
+          <p class="section-kicker">очередь, без жёстких дедлайнов</p>
+          <h2 class="section-title">все задачи</h2>
+        </div>
+        <div class="section-actions">
+          <button class="icon-btn" id="addTaskBtn" aria-label="добавить задачу"><svg><use href="#i-plus"/></svg></button>
+        </div>
+      </div>
+      <div class="filter-row" id="tasksFilters">
+        <button class="filter-pill active" data-filter="all">все</button>
+        <button class="filter-pill" data-filter="video">план видео</button>
+        <button class="filter-pill" data-filter="custom">моё</button>
+        <button class="filter-pill" data-filter="open">в работе</button>
+        <button class="filter-pill" data-filter="done">сделано</button>
+      </div>
+      <div class="task-list" id="tasksMount"></div>
+      <p class="small-note">блок раскрывается, когда в нём идёт работа, и схлопывается, когда все шаги готовы.</p>
+    </section>
+
+    <section class="view" id="view-video" data-view="video" hidden>
+      <div class="section-title-row">
+        <div>
+          <p class="section-kicker">от идеи до выкладки</p>
+          <h2 class="section-title">план видео</h2>
+        </div>
+        <div class="section-actions" id="videoHeadActions"></div>
+      </div>
+      <div id="videoMount"></div>
+    </section>
+
+    <section class="view" id="view-ideas" data-view="ideas" hidden>
+      <div class="section-title-row">
+        <div>
+          <p class="section-kicker">для будущих роликов</p>
+          <h2 class="section-title">идеи</h2>
+        </div>
+        <span class="section-caption" id="ideasCaption">то, что не хочется потерять</span>
+      </div>
+      <div class="quick-idea" style="margin-bottom:12px">
+        <form class="quick-form" id="ideasForm">
+          <input class="quick-input" id="ideasInput" type="text" maxlength="240" autocomplete="off" placeholder="записать идею..." aria-label="записать идею">
+          <button class="quick-save" type="submit" aria-label="сохранить"><svg><use href="#i-arrow-up"/></svg></button>
+        </form>
+      </div>
+      <div class="idea-list" id="ideasMount"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="copy">sixteendope ©</p>
+    <p class="foot-note">всё хранится на этом устройстве</p>
+    <button class="reset-data" id="resetData">сбросить данные приложения</button>
+  </footer>
+</div>
+
+<div id="miniTimerMount"></div>
+<div class="modal-root" id="modalRoot"></div>
+<div class="toast-root" id="toastRoot" aria-live="polite"></div>
+
+<script>
+"use strict";
+const STORAGE_KEY = "sixteendope.planner.v1";
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const MONTHS = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+const WEEKDAYS = ["вс","пн","вт","ср","чт","пт","сб"];
+const NEG = "#c0255f";
+const uid = (p = "id") => p + "_" + Math.random().toString(36).slice(2, 7) + Date.now().toString(36).slice(-4);
+
+const pad = n => String(n).padStart(2, "0");
+const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
+const escapeHTML = str => String(str ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const isoDate = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const todayISO = () => isoDate(new Date());
+const parseISO = iso => { const [y,m,d] = String(iso).split("-").map(Number); return new Date(y, m - 1, d, 12, 0, 0, 0); };
+const startOfDay = (d = new Date()) => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0, 0);
+const addDays = (d, n) => { const x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; };
+const isWeekend = d => d.getDay() === 0 || d.getDay() === 6;
+const daysBetween = (aISO, bISO) => Math.round((parseISO(bISO) - parseISO(aISO)) / 86400000);
+const humanDate = (dateOrISO, withWeekday = true) => {
+  const d = typeof dateOrISO === "string" ? parseISO(dateOrISO) : dateOrISO;
+  const base = `${d.getDate()} ${MONTHS[d.getMonth()]}`;
+  return withWeekday ? `${WEEKDAYS[d.getDay()]}, ${base}` : base;
+};
+const shortDate = dateOrISO => humanDate(dateOrISO, false);
+const plural = (n, forms) => {
+  const a = Math.abs(n) % 100, b = a % 10;
+  if (a > 10 && a < 20) return forms[2];
+  if (b > 1 && b < 5) return forms[1];
+  if (b === 1) return forms[0];
+  return forms[2];
+};
+function addWorkdaysISO(iso, n) {
+  let d = parseISO(iso);
+  let added = 0;
+  while (added < n) {
+    d = addDays(d, 1);
+    if (!isWeekend(d)) added++;
+  }
+  while (isWeekend(d)) d = addDays(d, 1);
+  return isoDate(d);
+}
+function nextWorkdayISO(iso = todayISO()) {
+  let d = parseISO(iso);
+  while (isWeekend(d)) d = addDays(d, 1);
+  return isoDate(d);
+}
+function defaultReleaseDate() { return addWorkdaysISO(todayISO(), 10); }
+function formatRemaining(ms) {
+  const sec = Math.max(0, Math.ceil(ms / 1000));
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return `${pad(m)}:${pad(s)}`;
+}
+function formatEnd(endAt) {
+  const d = new Date(endAt);
+  return `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+const VIDEO_TEMPLATE = [
+  { phase:"подготовка", type:"timer", minutes:35, note:"идея, сценарий и то, как показать мысль", steps:[
+    { title:"идея и название", note:"придумать рабочее название и обещание ролика" },
+    { title:"сценарий", note:"собрать структуру и текст" },
+    { title:"список бирол", note:"что хочется показать в кадре" },
+    { title:"сюжет и сценки", note:"придумать, как показать мысль каждой главы" },
+    { title:"переходы между главами", note:"связать главы между собой" }
+  ]},
+  { phase:"съёмка", type:"shot", minutes:10, note:"телефон, один тап, без таймера", steps:[
+    { title:"говорящая голова", note:"снять на телефон, не следить за таймером" },
+    { title:"домашние биролы", note:"спокойно снять то, что рядом" },
+    { title:"уличные биролы", note:"нужен помощник, зависит от погоды", helper:true, weather:true }
+  ]},
+  { phase:"монтаж", type:"timer", minutes:50, note:"таймеры, чтобы не уходить в ютуб", steps:[
+    { title:"сброс на комп", note:"перенести материал и разложить" },
+    { title:"нарезка головы", note:"убрать лишнее из говорящей головы" },
+    { title:"начальная сценка и крутые моменты", note:"выбрать лучшие кадры" },
+    { title:"переходы", note:"собрать ритм между главами" },
+    { title:"саунддизайн", note:"звуки, атмосфера, акценты" },
+    { title:"вставка бирол", note:"поставить кадры по смыслу" },
+    { title:"музыка", note:"подложка и настроение" },
+    { title:"цветокоррекция", note:"свести картинку к единому виду" }
+  ]},
+  { phase:"финал", type:"day", minutes:20, note:"без таймера, просто на день", steps:[
+    { title:"рендер", note:"собрать финальный файл" },
+    { title:"превью", note:"обложка и название" },
+    { title:"выкладка", note:"опубликовать и выдохнуть" }
+  ]}
+];
+
+function baseVideoTasks() {
+  return VIDEO_TEMPLATE.map((block, bi) => ({
+    id: `video_task_${bi}`,
+    phase: block.phase,
+    title: block.phase,
+    note: block.note,
+    source: "video",
+    type: block.type,
+    minutes: block.minutes,
+    order: bi,
+    createdAt: Date.now() - ((VIDEO_TEMPLATE.length - bi) * 1000),
+    steps: block.steps.map((s, si) => ({
+      id: `video_step_${bi}_${si}`,
+      title: s.title,
+      note: s.note || "",
+      done: false,
+      doneAt: null,
+      helper: !!s.helper,
+      weather: !!s.weather
+    }))
+  }));
+}
+
+function seedState() {
+  const now = new Date();
+  const tasks = baseVideoTasks();
+  let n = 0;
+  tasks.forEach(t => t.steps.forEach(s => {
+    if (n < 6) {
+      s.done = true;
+      s.doneAt = addDays(now, -1 - Math.floor(n / 2)).toISOString();
+    }
+    n++;
+  }));
+  const release = addWorkdaysISO(todayISO(), 12);
+  return {
+    version: 1,
+    theme: "dark",
+    honor: 66,
+    honorTrend: 1,
+    lastHonorChange: 2,
+    lastOpen: todayISO(),
+    firstRun: true,
+    created: now.toISOString(),
+    dayLog: {
+      date: todayISO(),
+      honorStart: 64,
+      done: [{ title:"сценарий", minutes:35, task:"подготовка", type:"timer", at: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 20).toISOString() }],
+      minutes: 35,
+      ended: false
+    },
+    skipped: { date: todayISO(), ids: [] },
+    notTodayCount: 0,
+    running: null,
+    breakUntil: null,
+    breakFor: null,
+    focus: null,
+    video: {
+      id: uid("video"),
+      title: "старые камеры снимают красивее? разбираюсь",
+      releaseDate: release,
+      createdAt: now.toISOString()
+    },
+    tasks,
+    ideas: [
+      { id: uid("idea"), text:"видео про то, как я храню картриджи", createdAt: addDays(now, -2).toISOString() },
+      { id: uid("idea"), text:"сравнить две плёночные камеры на закате", createdAt: addDays(now, -1).toISOString() }
+    ]
+  };
+}
+
+function normalizeState(s) {
+  const base = seedState();
+  const merged = Object.assign({}, base, s || {});
+  if (!Array.isArray(merged.tasks) || !merged.tasks.length) merged.tasks = s && s.tasks ? s.tasks : base.tasks;
+  merged.tasks = merged.tasks.map(t => ({
+    id: t.id || uid("task"),
+    phase: t.phase || (t.source === "video" ? t.title : "моё"),
+    title: t.title || "задача",
+    note: t.note || "",
+    source: t.source === "video" ? "video" : "custom",
+    type: ["timer","shot","day"].includes(t.type) ? t.type : "timer",
+    minutes: Number(t.minutes) || (t.type === "shot" ? 10 : t.type === "day" ? 20 : 35),
+    order: Number.isFinite(t.order) ? t.order : 99,
+    createdAt: t.createdAt || new Date().toISOString(),
+    steps: Array.isArray(t.steps) && t.steps.length ? t.steps.map((step, i) => ({
+      id: step.id || uid("step"),
+      title: step.title || `шаг ${i + 1}`,
+      note: step.note || "",
+      done: !!step.done,
+      doneAt: step.doneAt || null,
+      helper: !!step.helper,
+      weather: !!step.weather
+    })) : [{ id: uid("step"), title: t.title || "задача", note: "", done: false, doneAt: null }]
+  }));
+  merged.honor = clamp(Number(merged.honor) || 0, 0, 100);
+  merged.ideas = Array.isArray(merged.ideas) ? merged.ideas : [];
+  merged.dayLog = merged.dayLog && typeof merged.dayLog === "object" ? merged.dayLog : base.dayLog;
+  merged.dayLog.done = Array.isArray(merged.dayLog.done) ? merged.dayLog.done : [];
+  merged.skipped = merged.skipped && typeof merged.skipped === "object" ? merged.skipped : { date: todayISO(), ids: [] };
+  return merged;
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return seedState();
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return seedState();
+    return normalizeState(parsed);
+  } catch (err) {
+    return seedState();
+  }
+}
+
+let state = loadState();
+const ui = {
+  view: "today",
+  filter: "all",
+  userOpen: new Set(),
+  userClosed: new Set(),
+  timerModalFor: null,
+  breakNotifiedFor: null,
+  modalLocked: false,
+  firstRunPinged: false
+};
+let wakeLock = null;
+let toastTimer = null;
+
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (err) {
+    showToast("не получилось сохранить. проверь память браузера.");
+  }
+}
+
+const isTaskDone = task => Array.isArray(task.steps) && task.steps.length > 0 && task.steps.every(s => s.done);
+const taskDoneCount = task => task.steps.filter(s => s.done).length;
+const taskPercent = task => Math.round(taskDoneCount(task) / Math.max(1, task.steps.length) * 100);
+const videoTasks = () => state.tasks.filter(t => t.source === "video");
+const customTasks = () => state.tasks.filter(t => t.source !== "video");
+function allVideoSteps() {
+  const out = [];
+  videoTasks().forEach(task => task.steps.forEach(step => out.push({ task, step })));
+  return out;
+}
+function videoProgress() {
+  const all = allVideoSteps();
+  return { done: all.filter(x => x.step.done).length, total: all.length, remaining: all.filter(x => !x.step.done).length };
+}
+function isVideoComplete() {
+  const p = videoProgress();
+  return p.total > 0 && p.remaining === 0;
+}
+function skippedSet() {
+  if (!state.skipped || state.skipped.date !== todayISO()) return new Set();
+  return new Set(state.skipped.ids || []);
+}
+function findEntry(taskId, stepId) {
+  const task = state.tasks.find(t => t.id === taskId);
+  if (!task) return null;
+  const step = task.steps.find(s => s.id === stepId);
+  return step ? { task, step } : null;
+}
+function currentEntry() {
+  const skipped = skippedSet();
+  if (state.focus) {
+    const all = [];
+    state.tasks.forEach(t => t.steps.forEach(s => all.push({ task: t, step: s })));
+    const focused = all.find(x => x.step.id === state.focus && !x.step.done && !skipped.has(x.step.id));
+    if (focused) return focused;
+  }
+  const ordered = [...videoTasks(), ...customTasks()];
+  for (const task of ordered) {
+    for (const step of task.steps) {
+      if (!step.done && !skipped.has(step.id)) return { task, step };
+    }
+  }
+  return null;
+}
+function containerForEntry(taskId) {
+  return state.tasks.find(t => t.id === taskId) || null;
+}
+function releaseInfo() {
+  if (!state.video) return { days: null, label: "нет даты", dateLabel: "" };
+  const days = Math.max(0, daysBetween(todayISO(), state.video.releaseDate));
+  return {
+    days,
+    dateLabel: humanDate(state.video.releaseDate),
+    label: days === 0 ? "выход сегодня" : `через ${days} ${plural(days, ["день","дня","дней"])}`
+  };
+}
+function currentMinutesFor(task) {
+  if (task.type === "shot") return 10;
+  if (task.type === "day") return 20;
+  return Number(task.minutes) || 35;
+}
+function adjustHonor(delta, trend) {
+  state.honor = clamp(Math.round((state.honor + delta) * 10) / 10, 0, 100);
+  state.honorTrend = trend ?? (delta >= 0 ? 1 : -1);
+  state.lastHonorChange = delta;
+}
+function todayLog() {
+  if (!state.dayLog || state.dayLog.date !== todayISO()) {
+    state.dayLog = { date: todayISO(), honorStart: state.honor, done: [], minutes: 0, ended: false };
+  }
+  return state.dayLog;
+}
+function rollover() {
+  const today = todayISO();
+  if (!state.lastOpen) {
+    state.lastOpen = today;
+    state.dayLog = { date: today, honorStart: state.honor, done: [], minutes: 0, ended: false };
+    save();
+    return false;
+  }
+  if (state.lastOpen === today) {
+    if (!state.dayLog || state.dayLog.date !== today) state.dayLog = { date: today, honorStart: state.honor, done: [], minutes: 0, ended: false };
+    if (!state.skipped || state.skipped.date !== today) state.skipped = { date: today, ids: [] };
+    return false;
+  }
+  const prev = parseISO(state.lastOpen);
+  const prevDone = state.dayLog && state.dayLog.date === state.lastOpen ? (state.dayLog.done || []).length : 0;
+  let missed = 0;
+  for (let d = addDays(prev, 1); d < parseISO(today); d = addDays(d, 1)) {
+    if (!isWeekend(d)) missed++;
+  }
+  let message = "";
+  if (missed > 0) {
+    adjustHonor(-Math.min(6, missed * 1.5), -1);
+    if (state.video && !isVideoComplete()) {
+      state.video.releaseDate = addWorkdaysISO(state.video.releaseDate, missed);
+    }
+    message = `день без шагов. честь мягко опустилась, дата выхода сдвинулась. всё нормально.`;
+  } else if (prevDone === 0 && isWeekdayDate(prev) && isoDate(addDays(prev, 1)) === today) {
+    adjustHonor(-1, -1);
+    if (state.video && !isVideoComplete()) {
+      state.video.releaseDate = addWorkdaysISO(state.video.releaseDate, 1);
+    }
+    message = "вчера не было шагов. честь чуть ниже, дата выхода мягко сдвинулась.";
+  }
+  if (state.video && !isVideoComplete() && daysBetween(today, state.video.releaseDate) < 0) {
+    state.video.releaseDate = addWorkdaysISO(today, 8);
+    message = message || "дата выхода мягко переехала. очередь собрана заново.";
+  }
+  state.dayLog = { date: today, honorStart: state.honor, done: [], minutes: 0, ended: false };
+  state.skipped = { date: today, ids: [] };
+  state.notTodayCount = 0;
+  state.lastOpen = today;
+  state.breakUntil = null;
+  save();
+  if (message) setTimeout(() => showToast(message, 4200), 500);
+  return true;
+}
+function isWeekdayDate(d) { return !isWeekend(d); }
+
+function markActivity() {
+  const today = todayISO();
+  state.lastOpen = today;
+  if (!state.skipped || state.skipped.date !== today) state.skipped = { date: today, ids: [] };
+  if (!state.dayLog || state.dayLog.date !== today) state.dayLog = { date: today, honorStart: state.honor, done: [], minutes: 0, ended: false };
+}
+
+function buildSchedule() {
+  const remaining = [];
+  [...videoTasks()].sort((a,b) => a.order - b.order).forEach(task => task.steps.forEach(step => {
+    if (!step.done) remaining.push({ task, step });
+  }));
+  if (!state.video) return { remaining, days: [] };
+  const release = parseISO(state.video.releaseDate);
+  const today = startOfDay();
+  let days = [];
+  let cursor = new Date(today.getTime());
+  let guard = 0;
+  while (cursor <= release && guard < 100) {
+    if (!isWeekend(cursor)) days.push(new Date(cursor.getTime()));
+    cursor = addDays(cursor, 1);
+    guard++;
+  }
+  if (!days.length) {
+    let next = startOfDay();
+    while (isWeekend(next)) next = addDays(next, 1);
+    days = [next];
+  }
+  const allocated = [];
+  let index = 0;
+  days.forEach((day, i) => {
+    const leftDays = days.length - i;
+    const left = remaining.length - index;
+    if (left <= 0) return;
+    const count = Math.max(1, Math.ceil(left / leftDays));
+    const items = remaining.slice(index, index + count);
+    index += count;
+    if (items.length) allocated.push({ date: isoDate(day), items });
+  });
+  return { remaining, days: allocated };
+}
+
+function setTheme(theme, animate = true) {
+  state.theme = theme === "light" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", state.theme);
+  const meta = $("#metaTheme");
+  if (meta) meta.setAttribute("content", state.theme === "light" ? "#efefeb" : "#070707");
+  save();
+}
+function toggleTheme() {
+  setTheme(state.theme === "dark" ? "light" : "dark");
+}
+function setView(view, shouldScroll = true) {
+  if (!["today","tasks","video","ideas"].includes(view)) view = "today";
+  const changed = ui.view !== view;
+  ui.view = view;
+  $$("[data-view]").forEach(el => { el.hidden = el.dataset.view !== view; });
+  $$("[data-nav]").forEach(btn => {
+    const active = btn.dataset.nav === view;
+    btn.classList.toggle("active", active);
+    if (active) btn.setAttribute("aria-current", "page"); else btn.removeAttribute("aria-current");
+  });
+  if (changed && shouldScroll) {
+    try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (err) { window.scrollTo(0, 0); }
+  }
+}
+function showToast(message, duration = 3200) {
+  const root = $("#toastRoot");
+  if (!root) return;
+  while (root.children.length > 2) root.firstElementChild?.remove();
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.textContent = message;
+  root.appendChild(el);
+  window.setTimeout(() => {
+    el.classList.add("out");
+    window.setTimeout(() => el.remove(), 320);
+  }, duration);
+}
+
+function skipEntry(entry, reason = "manual") {
+  if (!entry) return;
+  const today = todayISO();
+  if (!state.skipped || state.skipped.date !== today) state.skipped = { date: today, ids: [] };
+  if (!state.skipped.ids.includes(entry.step.id)) state.skipped.ids.push(entry.step.id);
+  const external = !!(entry.step.helper || entry.step.weather);
+  if (!external) {
+    const count = Number(state.notTodayCount) || 0;
+    const delta = count === 0 ? -1 : -2;
+    state.notTodayCount = count + 1;
+    adjustHonor(delta, -1);
+  }
+  if (state.running && state.running.stepId === entry.step.id) {
+    state.running = null;
+    releaseWakeLock();
+  }
+  if (state.focus === entry.step.id) state.focus = null;
+  markActivity();
+  save();
+  renderAll();
+  showToast(external ? "этот шаг подождёт погоду или помощника. остальное не блокирует." : reason === "timer" ? "не сегодня. честь чуть ниже, задача осталась в плане." : "отложено на сегодня. без красного.");
+}
+
+function startTask(taskId, stepId, options = {}) {
+  const entry = findEntry(taskId, stepId);
+  if (!entry) return;
+  const { task, step } = entry;
+  if (step.done) return;
+  if (task.type !== "timer") {
+    completeStep(task.id, step.id, { minutes: currentMinutesFor(task) });
+    return;
+  }
+  if (state.running) {
+    if (state.running.stepId === step.id) { setView("today"); renderAll(); return; }
+    openConfirm(
+      "таймер уже идёт",
+      `сейчас в работе «${state.running.stepTitle}». если начнёшь другой шаг, первый таймер остановится.`,
+      "переключиться",
+      () => { state.running = null; releaseWakeLock(); actuallyStart(task, step); },
+      { secondary: "оставить как есть" }
+    );
+    return;
+  }
+  actuallyStart(task, step, options);
+}
+
+function actuallyStart(task, step, options = {}) {
+  state.focus = step.id;
+  if (state.skipped && state.skipped.date === todayISO() && Array.isArray(state.skipped.ids)) {
+    state.skipped.ids = state.skipped.ids.filter(id => id !== step.id);
+  }
+  markActivity();
+  if (state.breakUntil) { state.breakUntil = null; state.breakFor = null; }
+  if (task.type === "timer") {
+    const minutes = Math.max(5, Number(options.minutes) || Number(task.minutes) || 35);
+    state.running = {
+      taskId: task.id,
+      stepId: step.id,
+      taskTitle: task.title,
+      stepTitle: step.title,
+      minutes,
+      startedAt: Date.now(),
+      endAt: Date.now() + minutes * 60000
+    };
+    ui.timerModalFor = null;
+    save();
+    requestWakeLock();
+    setView("today");
+    renderAll();
+    window.setTimeout(() => { if (state.running) renderToday(); }, 450);
+    showToast("таймер пошёл. дальше один шаг.");
+  } else {
+    completeStep(task.id, step.id, { minutes: currentMinutesFor(task) });
+  }
+}
+
+function completeStep(taskId, stepId, options = {}) {
+  const entry = findEntry(taskId, stepId);
+  if (!entry) return;
+  const { task, step } = entry;
+  if (step.done) return;
+  step.done = true;
+  step.doneAt = new Date().toISOString();
+  const minutes = Math.max(1, Math.round(Number(options.minutes) || currentMinutesFor(task)));
+  const log = todayLog();
+  log.done.push({ title: step.title, minutes, task: task.title, type: task.type, at: new Date().toISOString() });
+  log.minutes = (Number(log.minutes) || 0) + minutes;
+  markActivity();
+  adjustHonor(task.type === "shot" ? 3 : 2, 1);
+  if (state.running && state.running.stepId === step.id) {
+    state.running = null;
+    releaseWakeLock();
+  }
+  if (state.focus === step.id) {
+    const next = task.steps.find(s => !s.done);
+    state.focus = next ? next.id : null;
+  }
+  save();
+  const completedTask = isTaskDone(task);
+  if (completedTask) { ui.userOpen.delete(task.id); ui.userClosed.delete(task.id); }
+  renderHonor();
+  renderToday();
+  renderStats();
+  renderMiniTimer();
+  renderVideo();
+  if (completedTask) {
+    const card = document.querySelector(`[data-task-card="${task.id}"] .steps-wrap`);
+    if (card) {
+      card.style.maxHeight = card.scrollHeight + "px";
+      requestAnimationFrame(() => {
+        card.style.maxHeight = "0px";
+        card.style.opacity = "0";
+      });
+      window.setTimeout(() => { renderTasks(); showToast("блок собран. шагов стало меньше."); }, 420);
+    } else {
+      renderTasks();
+      showToast("блок собран. шагов стало меньше.");
+    }
+  } else {
+    renderTasks();
+    const messages = ["шаг закрыт. честь чуть выше.", "готово. очередь стала короче.", "хороший шаг. можно выдохнуть.", "снято. идём дальше мягко."];
+    showToast(messages[Math.floor(Math.random() * messages.length)]);
+  }
+}
+
+function startBreak(minutes = 10) {
+  state.breakUntil = Date.now() + minutes * 60000;
+  state.breakFor = state.running ? { taskId: state.running.taskId, stepId: state.running.stepId, title: state.running.stepTitle } : state.breakFor;
+  state.running = null;
+  ui.breakNotifiedFor = null;
+  releaseWakeLock();
+  save();
+  closeModal();
+  renderAll();
+  showToast("перерыв 10 минут. телефон можно отложить.");
+}
+
+function clearBreak() {
+  state.breakUntil = null;
+  state.breakFor = null;
+  ui.breakNotifiedFor = null;
+  save();
+  renderAll();
+}
+
+async function requestWakeLock() {
+  try {
+    if ("wakeLock" in navigator && document.visibilityState === "visible") {
+      wakeLock = await navigator.wakeLock.request("screen");
+      wakeLock.addEventListener("release", () => { wakeLock = null; });
+    }
+  } catch (err) { wakeLock = null; }
+}
+function releaseWakeLock() {
+  try { if (wakeLock) wakeLock.release(); } catch (err) {}
+  wakeLock = null;
+}
+
+function navTo(view) { setView(view); renderAll(); }
+
+function makeIcon(size = 512, maskable = false) {
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#080808";
+  ctx.fillRect(0, 0, size, size);
+  if (!maskable) {
+    const r = size * 0.22;
+    ctx.globalCompositeOperation = "destination-in";
+    ctx.beginPath();
+    ctx.moveTo(r, 0); ctx.lineTo(size - r, 0); ctx.quadraticCurveTo(size, 0, size, r);
+    ctx.lineTo(size, size - r); ctx.quadraticCurveTo(size, size, size - r, size);
+    ctx.lineTo(r, size); ctx.quadraticCurveTo(0, size, 0, size - r);
+    ctx.lineTo(0, r); ctx.quadraticCurveTo(0, 0, r, 0); ctx.closePath(); ctx.fill();
+    ctx.globalCompositeOperation = "source-over";
+  }
+  const cx = size / 2, cy = size / 2, outer = size * (maskable ? 0.25 : 0.3), inner = outer * 0.42;
+  ctx.beginPath();
+  for (let i = 0; i < 10; i++) {
+    const angle = -Math.PI / 2 + i * Math.PI / 5;
+    const rad = i % 2 === 0 ? outer : inner;
+    const x = cx + Math.cos(angle) * rad, y = cy + Math.sin(angle) * rad;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = "#f7f7f4";
+  ctx.shadowColor = "rgba(255,255,255,.45)";
+  ctx.shadowBlur = size * 0.06;
+  ctx.fill();
+  return canvas.toDataURL("image/png");
+}
+
+function setupPWA() {
+  try {
+    const icon512 = makeIcon(512, false);
+    const iconMask = makeIcon(512, true);
+    const apple = makeIcon(180, true);
+    const appleLink = $("#appleIcon");
+    if (appleLink) appleLink.href = apple;
+    const pageUrl = location.href.split("#")[0].split("?")[0];
+    const scopeUrl = pageUrl.replace(/[^/]*$/, "");
+    const manifest = {
+      name: "планер ютуба",
+      short_name: "планер",
+      description: "спокойный планер для съёмок, монтажа и идей",
+      start_url: pageUrl,
+      scope: scopeUrl,
+      id: pageUrl,
+      display: "standalone",
+      orientation: "portrait",
+      background_color: "#070707",
+      theme_color: "#070707",
+      icons: [
+        { src: icon512, sizes: "512x512", type: "image/png", purpose: "any" },
+        { src: iconMask, sizes: "512x512", type: "image/png", purpose: "maskable" }
+      ]
+    };
+    const blob = new Blob([JSON.stringify(manifest)], { type: "application/manifest+json" });
+    const link = document.createElement("link");
+    link.rel = "manifest";
+    link.href = URL.createObjectURL(blob);
+    document.head.appendChild(link);
+  } catch (err) {}
+}
+
+function honorWord(value) {
+  if (value >= 82) return "высокая";
+  if (value >= 66) return "ровная";
+  if (value >= 46) return "спокойная";
+  if (value >= 26) return "мягкая";
+  return "берегу";
+}
+
+function renderHeader() {
+  const dateEl = $("#headerDate");
+  if (dateEl) dateEl.textContent = humanDate(new Date());
+  const ideaCount = state.ideas.length;
+  const navCount = $("#ideasNavCount");
+  if (navCount) navCount.textContent = String(ideaCount);
+  const quickCount = $("#quickIdeaCount");
+  if (quickCount) quickCount.textContent = `${ideaCount} ${plural(ideaCount, ["идея","идеи","идей"])}`;
+  const caption = $("#ideasCaption");
+  if (caption) caption.textContent = ideaCount ? `${ideaCount} ${plural(ideaCount, ["идея","идеи","идей"])} в запасе` : "то, что не хочется потерять";
+}
+
+function renderHonor() {
+  const card = $("#honorCard");
+  if (!card) return;
+  const value = clamp(Number(state.honor) || 0, 0, 100);
+  const start = state.dayLog && state.dayLog.date === todayISO() ? Number(state.dayLog.honorStart ?? value) : value;
+  const delta = Math.round((value - start) * 10) / 10;
+  const deltaRounded = Math.round(delta);
+  const valueEl = $("#honorValue");
+  const deltaEl = $("#honorDelta");
+  const stateEl = $("#honorState");
+  const fill = $("#honorFill");
+  const knob = $("#honorKnob");
+  const track = $("#honorTrack");
+  if (valueEl) valueEl.textContent = String(Math.round(value));
+  if (stateEl) stateEl.textContent = honorWord(value);
+  if (deltaEl) {
+    deltaEl.textContent = deltaRounded === 0 ? "0" : deltaRounded > 0 ? `+${deltaRounded}` : `${deltaRounded}`;
+    deltaEl.classList.toggle("is-up", deltaRounded > 0);
+    deltaEl.classList.toggle("is-down", deltaRounded < 0);
+  }
+  if (fill) fill.style.width = `${value}%`;
+  if (knob) knob.style.left = `${value}%`;
+  if (track) track.setAttribute("aria-valuenow", String(Math.round(value)));
+  card.classList.toggle("is-down", Number(state.honorTrend) < 0);
+}
+
+function renderStats() {
+  const mount = $("#statsMount");
+  if (!mount) return;
+  const log = state.dayLog && state.dayLog.date === todayISO() ? state.dayLog : { done: [], minutes: 0 };
+  const release = releaseInfo();
+  const done = log.done.length;
+  const minutes = Number(log.minutes) || 0;
+  mount.innerHTML = `
+    <div class="stat">
+      <div class="stat-label"><svg><use href="#i-check"/></svg>сделано</div>
+      <div class="stat-value"><strong>${done}</strong><span>${plural(done, ["шаг","шага","шагов"])}</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-label"><svg><use href="#i-clock"/></svg>в работе</div>
+      <div class="stat-value"><strong>${minutes}</strong><span>мин</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-label"><svg><use href="#i-calendar"/></svg>до выхода</div>
+      <div class="stat-value"><strong>${release.days === null ? "0" : release.days}</strong><span>${state.video ? plural(release.days, ["день","дня","дней"]) : "нет плана"}</span></div>
+    </div>`;
+  const hint = $("#endDayHint");
+  if (hint) hint.textContent = log.ended ? "день закрыт, итоги сохранены" : "итоги, время и честь";
+}
+
+function typeLabel(task) {
+  if (task.type === "shot") return "снято · один тап";
+  if (task.type === "day") return "на день · без таймера";
+  return `таймер · ${Number(task.minutes) || 35} мин`;
+}
+function typeShort(task) {
+  if (task.type === "shot") return "снято";
+  if (task.type === "day") return "на день";
+  return `${Number(task.minutes) || 35} мин`;
+}
+function typeIcon(task) {
+  if (task.type === "shot") return "i-camera";
+  if (task.type === "day") return "i-calendar";
+  return "i-clock";
+}
+
+function stepMeta(step) {
+  const tags = [];
+  if (step.helper) tags.push('<span class="step-tag"><svg><use href="#i-helper"/></svg>нужен помощник</span>');
+  if (step.weather) tags.push('<span class="step-tag"><svg><use href="#i-weather"/></svg>зависит от погоды</span>');
+  return tags.join("");
+}
+
+function renderToday() {
+  const mount = $("#heroMount");
+  if (!mount) return;
+  const entry = currentEntry();
+  if (!entry) {
+    if (!state.tasks.length) {
+      mount.innerHTML = `
+        <article class="hero">
+          <div class="hero-top">
+            <div class="hero-tags"><span class="tag solid">пусто</span><span class="tag">это нормально</span></div>
+            <span class="hero-index">${humanDate(new Date()).split(",")[0]}</span>
+          </div>
+          <div class="hero-empty">
+            <div class="hero-star"><svg><use href="#i-star"/></svg></div>
+            <p class="hero-eyebrow">можно начать с одного ролика</p>
+            <h1>собери первый план</h1>
+            <p>название и дата выхода, остальное приложение разложит по будням. или добавь свою задачу на сегодня.</p>
+          </div>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-nav="video">собрать план <svg><use href="#i-arrow"/></svg></button>
+            <button class="btn btn-quiet" data-action="add-task">своя задача</button>
+          </div>
+          <div class="hero-foot">
+            <button class="text-link" data-nav="ideas">есть идея <svg><use href="#i-arrow-up"/></svg></button>
+            <span class="text-link" style="pointer-events:none">всё сохраняется здесь</span>
+          </div>
+        </article>`;
+      return;
+    }
+    const allDone = state.tasks.every(isTaskDone) && state.tasks.length > 0;
+    mount.innerHTML = `
+      <article class="hero">
+        <div class="hero-top">
+          <div class="hero-tags"><span class="tag solid">${allDone ? "план собран" : "пауза"}</span><span class="tag">${allDone ? "можно выдохнуть" : "без спешки"}</span></div>
+          <span class="hero-index">${humanDate(new Date()).split(",")[0]}</span>
+        </div>
+        <div class="hero-empty">
+          <div class="hero-star"><svg><use href="#i-star"/></svg></div>
+          <p class="hero-eyebrow">${allDone ? "все шаги этого ролика готовы" : "очередь на сегодня закончилась"}</p>
+          <h1>${allDone ? "всё сошлось" : "на сегодня всё"}</h1>
+          <p>${allDone ? "можно выложить видео или собрать новый план. без давления." : "ничего не краснеет. отложенные шаги остались в плане, просто на сегодня хватит."}</p>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-nav="tasks">посмотреть задачи <svg><use href="#i-arrow"/></svg></button>
+          <button class="btn btn-quiet" data-action="open-end-day">итоги дня</button>
+        </div>
+        <div class="hero-foot">
+          <button class="text-link" data-nav="video">план видео</button>
+          <button class="text-link" data-nav="ideas">записать идею <svg><use href="#i-arrow-up"/></svg></button>
+        </div>
+      </article>`;
+    return;
+  }
+  const { task, step } = entry;
+  const running = state.running && state.running.stepId === step.id ? state.running : null;
+  const video = videoProgress();
+  const videoIndex = task.source === "video" ? allVideoSteps().findIndex(x => x.step.id === step.id) + 1 : null;
+  const progressDone = task.source === "video" ? video.done : taskDoneCount(task);
+  const progressTotal = task.source === "video" ? video.total : task.steps.length;
+  const progressPercent = Math.round(progressDone / Math.max(1, progressTotal) * 100);
+  const showTaskTitle = step.title.trim().toLowerCase() !== task.title.trim().toLowerCase();
+  const isTimer = task.type === "timer";
+  const primaryAction = running ? "complete-early" : isTimer ? "start" : "complete-step";
+  const primaryLabel = running ? "выполнено" : task.type === "shot" ? "снято" : task.type === "day" ? "сделано" : "начать";
+  const primaryIcon = running || !isTimer ? "i-check" : "i-play";
+  const skipped = skippedSet().has(step.id);
+  mount.innerHTML = `
+    <article class="hero">
+      <div class="hero-top">
+        <div class="hero-tags">
+          <span class="tag solid">${escapeHTML(task.source === "video" ? task.phase : "моя задача")}</span>
+          <span class="tag"><svg><use href="#${typeIcon(task)}"/></svg>${typeLabel(task)}</span>
+        </div>
+        <span class="hero-index"><svg><use href="#i-layers"/></svg>${videoIndex ? `шаг ${videoIndex} из ${video.total}` : `${taskDoneCount(task)} из ${task.steps.length}`}</span>
+      </div>
+      <div class="hero-main">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">${showTaskTitle ? escapeHTML(task.title) : escapeHTML(task.source === "video" ? "план видео" : "одна задача")}</p>
+          <h1>${escapeHTML(step.title)}</h1>
+          ${step.note ? `<p class="hero-note">${escapeHTML(step.note)}</p>` : task.note ? `<p class="hero-note">${escapeHTML(task.note)}</p>` : ""}
+        </div>
+        <div class="hero-star"><svg><use href="#${task.type === "shot" ? "i-camera" : task.type === "day" ? "i-star" : "i-play"}"/></svg></div>
+      </div>
+      ${running ? `
+        <div class="timer-block">
+          <div>
+            <div class="timer-clock" id="heroClock">${formatRemaining(running.endAt - Date.now())}</div>
+            <div class="timer-sub"><span class="live-dot"></span>до ${formatEnd(running.endAt)} · ${running.minutes} мин${getWakeLockLabel()}</div>
+          </div>
+          <div class="timer-controls">
+            <button class="timer-adjust" data-action="adjust-timer" data-delta="-5" aria-label="минус пять минут">−5</button>
+            <button class="timer-adjust" data-action="adjust-timer" data-delta="5" aria-label="плюс пять минут">+5</button>
+          </div>
+        </div>` : ""}
+      <div class="hero-progress">
+        <div class="hero-progress-head">
+          <span>сделано <b>${progressDone}</b> из ${progressTotal} ${plural(progressTotal, ["шаг","шага","шагов"])}${task.source === "video" ? " плана" : ""}</span>
+          <span>${progressPercent}%</span>
+        </div>
+        <div class="hero-progress-track"><div class="hero-progress-fill" style="width:${progressPercent}%"></div></div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-action="${primaryAction}" data-task="${task.id}" data-step="${step.id}">
+          <svg><use href="#${primaryIcon}"/></svg>${primaryLabel}
+        </button>
+        ${!running && task.steps.filter(s => !s.done).length > 1 ? `<button class="btn btn-quiet" data-nav="tasks" aria-label="открыть все задачи"><svg><use href="#i-list"/></svg></button>` : ""}
+      </div>
+      <div class="hero-foot">
+        <button class="text-link negative" data-action="not-today" data-task="${task.id}" data-step="${step.id}">${skipped ? "уже отложено" : "не сегодня"}</button>
+        <button class="text-link" data-nav="tasks">все задачи <svg><use href="#i-arrow"/></svg></button>
+      </div>
+    </article>`;
+}
+
+function getWakeLockLabel() {
+  return wakeLock ? " · экран не гаснет" : "";
+}
+
+function isTaskOpen(task, entry) {
+  if (ui.userClosed.has(task.id)) return false;
+  if (ui.userOpen.has(task.id)) return true;
+  if (isTaskDone(task)) return false;
+  return !!(entry && entry.task.id === task.id);
+}
+
+function renderTasks() {
+  const mount = $("#tasksMount");
+  if (!mount) return;
+  const entry = currentEntry();
+  const skipped = skippedSet();
+  let list = [...state.tasks];
+  if (ui.filter === "video") list = list.filter(t => t.source === "video");
+  else if (ui.filter === "custom") list = list.filter(t => t.source !== "video");
+  else if (ui.filter === "open") list = list.filter(t => !isTaskDone(t));
+  else if (ui.filter === "done") list = list.filter(isTaskDone);
+  list.sort((a, b) => {
+    if (a.source !== b.source) return a.source === "video" ? -1 : 1;
+    return (Number(a.order) || 99) - (Number(b.order) || 99);
+  });
+  $$("#tasksFilters .filter-pill").forEach(btn => btn.classList.toggle("active", btn.dataset.filter === ui.filter));
+  if (!list.length) {
+    mount.innerHTML = `
+      <div class="empty-card">
+        <div class="hero-star"><svg><use href="#i-list"/></svg></div>
+        <h3>${ui.filter === "done" ? "пока ничего не закрыто" : ui.filter === "custom" ? "тут появятся твои задачи" : "список пока пустой"}</h3>
+        <p>${ui.filter === "done" ? "первый шаг всегда можно начать с малого." : "добавь свою задачу или собери план видео."}</p>
+        <button class="mini-btn" style="margin-top:14px" data-action="add-task"><svg><use href="#i-plus"/></svg>добавить задачу</button>
+      </div>`;
+    return;
+  }
+  mount.innerHTML = list.map(task => {
+    const doneCount = taskDoneCount(task);
+    const pct = taskPercent(task);
+    const done = isTaskDone(task);
+    const open = isTaskOpen(task, entry);
+    const containsCurrent = !!(entry && entry.task.id === task.id);
+    const firstOpen = task.steps.find(s => !s.done);
+    const stepsHTML = task.steps.map(step => {
+      const isCurrent = !!(entry && entry.step.id === step.id);
+      const isSkipped = skipped.has(step.id) && !step.done;
+      let actionHTML = "";
+      if (!step.done) {
+        if (task.type === "timer") actionHTML = `<button class="step-action" data-action="start" data-task="${task.id}" data-step="${step.id}" aria-label="начать ${escapeHTML(step.title)}"><svg><use href="#i-play"/></svg></button>`;
+        else actionHTML = `<button class="step-action" data-action="complete-step" data-task="${task.id}" data-step="${step.id}" aria-label="отметить ${escapeHTML(step.title)}">${task.type === "shot" ? "снято" : "готово"}</button>`;
+      }
+      return `
+        <div class="step-row ${step.done ? "done" : ""} ${isCurrent ? "current-step" : ""}">
+          <button class="step-check" data-action="complete-step" data-task="${task.id}" data-step="${step.id}" aria-label="${step.done ? "шаг готов" : "отметить шаг"}" ${step.done ? "disabled" : ""}>
+            ${step.done ? '<svg><use href="#i-check"/></svg>' : ""}
+          </button>
+          <div class="step-main">
+            <p class="step-title">${escapeHTML(step.title)}</p>
+            ${(step.helper || step.weather || isSkipped) ? `<div class="step-tags">${stepMeta(step)}${isSkipped ? '<span class="step-tag">отложено на сегодня</span>' : ""}</div>` : ""}
+          </div>
+          ${actionHTML}
+        </div>`;
+    }).join("");
+    return `
+      <article class="task-card ${done ? "is-done" : ""} ${containsCurrent && !done ? "current" : ""} ${open ? "" : "collapsed"}" data-task-card="${task.id}">
+        <div class="task-topline">
+          <div class="task-topline-left">
+            <span class="tag">${task.source === "video" ? escapeHTML(task.phase) : "моя задача"}</span>
+            <span class="tag">${typeShort(task)}</span>
+          </div>
+          <div class="task-topline-left" style="justify-content:flex-end;flex:0 0 auto">
+            ${containsCurrent && !done ? '<span class="tag" style="color:var(--text)">сейчас</span>' : ""}
+            <span class="task-count">${doneCount} / ${task.steps.length}</span>
+            <button class="icon-btn" style="width:27px;height:27px" data-action="edit-task" data-task="${task.id}" aria-label="изменить задачу"><svg><use href="#i-dots"/></svg></button>
+          </div>
+        </div>
+        <div class="task-title-row">
+          <button class="task-title" data-action="toggle-task" data-task="${task.id}">
+            ${done ? '<svg><use href="#i-check"/></svg>' : ""}
+            <span>${escapeHTML(task.title)}</span>
+            <svg style="transform:rotate(${open ? "180deg" : "0deg"});transition:transform .3s"><use href="#i-chevron"/></svg>
+          </button>
+        </div>
+        ${task.note ? `<p class="task-note">${escapeHTML(task.note)}</p>` : ""}
+        <div class="task-progress">
+          <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+          <span class="task-pct">${pct}%</span>
+        </div>
+        <div class="steps-wrap"><div class="steps-inner">${stepsHTML}</div></div>
+        <div class="task-foot">
+          <span class="task-foot-meta">
+            <svg><use href="#${done ? "i-check" : typeIcon(task)}"/></svg>
+            ${done ? "все шаги готовы" : `${doneCount} из ${task.steps.length} готово`}
+          </span>
+          ${!done && firstOpen ? `<button class="mini-btn" data-action="task-primary" data-task="${task.id}" data-step="${firstOpen.id}">${task.type === "timer" ? '<svg><use href="#i-play"/></svg>начать' : task.type === "shot" ? "снято" : "сделано"}</button>` : done ? '<button class="mini-btn ghost" data-action="toggle-task" data-task="' + task.id + '"><svg><use href="#i-chevron"/></svg>развернуть</button>' : ""}
+        </div>
+      </article>`;
+  }).join("");
+}
+
+function renderVideo() {
+  const mount = $("#videoMount");
+  if (!mount) return;
+  const headActions = $("#videoHeadActions");
+  if (!state.video) {
+    if (headActions) headActions.innerHTML = "";
+    mount.innerHTML = `
+      <article class="hero">
+        <div class="hero-top">
+          <div class="hero-tags"><span class="tag solid">шаблон видео</span><span class="tag">19 шагов</span></div>
+          <span class="hero-index"><svg><use href="#i-calendar"/></svg>пн-пт</span>
+        </div>
+        <div class="hero-main">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">собери план на один ролик</p>
+            <h1>название и дата выхода</h1>
+            <p class="hero-note">этапы разложатся по будням сами. если пропустишь день, ничего не покраснеет, очередь сдвинется.</p>
+          </div>
+          <div class="hero-star"><svg><use href="#i-calendar"/></svg></div>
+        </div>
+        <form id="videoCreateForm" style="position:relative;z-index:1;margin-top:18px">
+          <div class="field">
+            <label class="field-label" for="videoCreateTitle">название ролика</label>
+            <input class="field-input" id="videoCreateTitle" name="title" type="text" maxlength="120" placeholder="например, почему старые камеры снимают красивее" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label class="field-label" for="videoCreateDate">дата выхода</label>
+            <input class="field-input" id="videoCreateDate" name="date" type="date" min="${todayISO()}" value="${defaultReleaseDate()}" required>
+          </div>
+          <p class="error-text" id="videoCreateError"></p>
+          <button class="btn btn-primary" type="submit" style="width:100%;margin-top:2px">собрать план <svg><use href="#i-arrow"/></svg></button>
+        </form>
+        <div class="hero-foot">
+          <span class="text-link" style="pointer-events:none">19 шагов · подготовка, съёмка, монтаж, финал</span>
+        </div>
+      </article>
+      <p class="small-note">съёмка в один тап. монтаж с таймером. финал без таймера. в среднем 5-6 часов работы в день с перерывами.</p>`;
+    return;
+  }
+  const video = state.video;
+  const progress = videoProgress();
+  const pct = Math.round(progress.done / Math.max(1, progress.total) * 100);
+  const release = releaseInfo();
+  const schedule = buildSchedule();
+  const isComplete = progress.total > 0 && progress.remaining === 0;
+  if (headActions) {
+    headActions.innerHTML = `
+      <button class="icon-btn" data-action="replan" aria-label="пересобрать план"><svg><use href="#i-refresh"/></svg></button>
+      <button class="icon-btn" data-action="edit-video" aria-label="изменить название и дату"><svg><use href="#i-pencil"/></svg></button>`;
+  }
+  const daysHTML = schedule.days.map(day => {
+    const isToday = day.date === todayISO();
+    const isRelease = day.date === video.releaseDate;
+    return `
+      <div class="day-card ${isToday ? "today" : ""}">
+        <div class="day-head">
+          <div class="day-head-left">
+            <span class="day-name">${isToday ? "сегодня" : day.date === isoDate(addDays(new Date(), 1)) ? "завтра" : WEEKDAYS[parseISO(day.date).getDay()]}</span>
+            <span class="day-date">${shortDate(day.date)}</span>
+            ${isRelease ? '<span class="day-count">выход</span>' : ""}
+          </div>
+          <span class="day-count">${day.items.length} ${plural(day.items.length, ["шаг","шага","шагов"])}</span>
+        </div>
+        ${day.items.map(item => `
+          <div class="day-item">
+            <div class="day-item-main">
+              <p class="day-item-title">${escapeHTML(item.step.title)}</p>
+              <div class="day-item-meta">
+                <span>${escapeHTML(item.task.phase)}</span>
+                <span>·</span>
+                <span>${typeShort(item.task)}</span>
+                ${item.step.helper ? '<span>·</span><span>нужен помощник</span>' : ""}
+                ${item.step.weather ? '<span>·</span><span>погода</span>' : ""}
+              </div>
+            </div>
+            <button class="day-play" data-action="start" data-task="${item.task.id}" data-step="${item.step.id}" aria-label="начать ${escapeHTML(item.step.title)}">
+              <svg><use href="#${item.task.type === "timer" ? "i-play" : "i-check"}"/></svg>
+            </button>
+          </div>`).join("")}
+      </div>`;
+  }).join("");
+  mount.innerHTML = `
+    <article class="project-card">
+      <div class="project-kicker">
+        <span class="tag" style="background:transparent;border:1px solid var(--card-line)">${isComplete ? "готово" : "текущий ролик"}</span>
+        <span class="task-count">${progress.done} из ${progress.total}</span>
+      </div>
+      <h2 class="project-title">${escapeHTML(video.title)}</h2>
+      <div class="project-meta">
+        <span class="tag"><svg><use href="#i-calendar"/></svg>выход ${shortDate(video.releaseDate)}</span>
+        <span class="tag">${release.label}</span>
+        <span class="tag">${progress.remaining ? `ещё ${progress.remaining} ${plural(progress.remaining, ["шаг","шага","шагов"])}` : "все шаги готовы"}</span>
+      </div>
+      <div class="hero-progress" style="margin-top:16px;color:var(--text)">
+        <div class="hero-progress-head" style="color:var(--muted)">
+          <span style="color:var(--text)">сделано <b>${progress.done}</b> из ${progress.total} шагов</span>
+          <span>${pct}%</span>
+        </div>
+        <div class="hero-progress-track" style="background:var(--track)"><div class="hero-progress-fill" style="width:${pct}%;background:var(--text)"></div></div>
+      </div>
+      <div class="project-actions">
+        <button class="mini-btn" data-action="replan"><svg><use href="#i-refresh"/></svg>пересобрать план</button>
+        <button class="mini-btn ghost" data-action="edit-video"><svg><use href="#i-pencil"/></svg>название и дата</button>
+        ${isComplete ? '<button class="mini-btn ghost" data-action="new-video"><svg><use href="#i-plus"/></svg>новый ролик</button>' : ""}
+      </div>
+    </article>
+    ${schedule.days.length ? `
+      <div class="section-title-row" style="margin-top:2px;margin-bottom:10px">
+        <div>
+          <p class="section-kicker">очередь по будням</p>
+          <h3 class="section-title" style="font-size:20px">что впереди</h3>
+        </div>
+        <span class="section-caption">даты примерные, порядок важнее</span>
+      </div>
+      <div class="timeline">${daysHTML}</div>
+    ` : `
+      <div class="empty-card">
+        <div class="hero-star"><svg><use href="#i-check"/></svg></div>
+        <h3>все шаги готовы</h3>
+        <p>можно выложить ролик и собрать новый план. или немного отдохнуть.</p>
+        <button class="mini-btn" style="margin-top:14px" data-action="new-video"><svg><use href="#i-plus"/></svg>новый ролик</button>
+      </div>`}
+    <p class="small-note">это очередь, а не жёсткие дедлайны. пропустил день, дата выхода мягко переехала, остальные шаги остались на месте.</p>
+    <div class="reset-line"><button class="tiny-link" data-action="new-video">собрать другой ролик</button></div>`;
+}
+
+function renderIdeas() {
+  const mount = $("#ideasMount");
+  if (!mount) return;
+  renderHeader();
+  if (!state.ideas.length) {
+    mount.innerHTML = `
+      <div class="empty-card">
+        <div class="hero-star"><svg><use href="#i-bulb"/></svg></div>
+        <h3>пока тихо</h3>
+        <p>запиши идею в одну строку. к ней можно вернуться, когда будет время.</p>
+      </div>`;
+    return;
+  }
+  mount.innerHTML = [...state.ideas].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)).map(idea => {
+    const created = new Date(idea.createdAt);
+    const date = isoDate(created) === todayISO() ? "сегодня" : isoDate(created) === isoDate(addDays(new Date(), -1)) ? "вчера" : shortDate(created);
+    return `
+      <article class="idea-card">
+        <span class="idea-star"><svg><use href="#i-star"/></svg></span>
+        <div class="idea-main">
+          <p class="idea-text">${escapeHTML(idea.text)}</p>
+          <div class="idea-meta">
+            <span class="idea-date">${date}</span>
+            <button class="idea-use" data-action="idea-use" data-idea="${idea.id}">в план видео</button>
+          </div>
+        </div>
+        <button class="idea-del" data-action="idea-delete" data-idea="${idea.id}" aria-label="удалить идею"><svg><use href="#i-trash"/></svg></button>
+      </article>`;
+  }).join("");
+}
+
+function renderMiniTimer() {
+  const mount = $("#miniTimerMount");
+  if (!mount) return;
+  const now = Date.now();
+  if (state.running) {
+    mount.innerHTML = `
+      <div class="mini-timer" role="status">
+        <span class="live-dot"></span>
+        <div class="mini-timer-copy">
+          <div class="mini-timer-time" id="miniClock">${formatRemaining(state.running.endAt - now)}</div>
+          <div class="mini-timer-label">${escapeHTML(state.running.stepTitle)}</div>
+        </div>
+        <button class="mini-timer-btn ghost" data-nav="today" aria-label="к текущей задаче"><svg><use href="#i-arrow-up"/></svg></button>
+        <button class="mini-timer-btn" data-action="complete-running" aria-label="выполнено"><svg><use href="#i-check"/></svg></button>
+      </div>`;
+    return;
+  }
+  if (state.breakUntil) {
+    const left = Math.max(0, state.breakUntil - now);
+    mount.innerHTML = `
+      <div class="mini-timer" role="status">
+        <span class="live-dot"></span>
+        <div class="mini-timer-copy">
+          <div class="mini-timer-time" id="breakClock">${left > 0 ? formatRemaining(left) : "00:00"}</div>
+          <div class="mini-timer-label">${left > 0 ? "перерыв, телефон можно отложить" : "перерыв закончился, можно возвращаться"}</div>
+        </div>
+        <button class="mini-timer-btn ghost" data-action="clear-break" aria-label="закончить перерыв"><svg><use href="#i-x"/></svg></button>
+        <button class="mini-timer-btn" data-action="break-return" aria-label="к задаче"><svg><use href="#i-arrow"/></svg></button>
+      </div>`;
+    return;
+  }
+  mount.innerHTML = "";
+}
+
+function renderAll() {
+  document.documentElement.setAttribute("data-theme", state.theme === "light" ? "light" : "dark");
+  renderHeader();
+  renderHonor();
+  renderStats();
+  renderToday();
+  renderTasks();
+  renderVideo();
+  renderIdeas();
+  renderMiniTimer();
+  setView(ui.view);
+}
+
+function tick() {
+  const now = Date.now();
+  if (state.lastOpen && state.lastOpen !== todayISO()) {
+    rollover();
+    renderAll();
+  }
+  if (state.running) {
+    if (now >= state.running.endAt) {
+      if (ui.timerModalFor !== state.running.startedAt) {
+        openTimerFinished(state.running);
+      }
+    } else {
+      const heroClock = $("#heroClock");
+      const miniClock = $("#miniClock");
+      if (heroClock) heroClock.textContent = formatRemaining(state.running.endAt - now);
+      if (miniClock) miniClock.textContent = formatRemaining(state.running.endAt - now);
+    }
+  }
+  if (state.breakUntil) {
+    const left = Math.max(0, state.breakUntil - now);
+    const breakClock = $("#breakClock");
+    if (breakClock) breakClock.textContent = left > 0 ? formatRemaining(left) : "00:00";
+    if (left <= 0 && ui.breakNotifiedFor !== state.breakUntil) {
+      ui.breakNotifiedFor = state.breakUntil;
+      renderMiniTimer();
+      showToast("перерыв закончился. можно вернуться одной кнопкой.");
+    }
+  }
+}
+
+function openModal(content, options = {}) {
+  const root = $("#modalRoot");
+  if (!root) return null;
+  root.innerHTML = `<div class="modal-backdrop"><div class="sheet" role="dialog" aria-modal="true">${content}</div></div>`;
+  document.body.style.overflow = "hidden";
+  ui.modalLocked = !!options.locked;
+  const backdrop = $(".modal-backdrop", root);
+  if (backdrop && !options.locked) {
+    backdrop.addEventListener("click", event => {
+      if (event.target === backdrop) closeModal();
+    });
+  }
+  const focusTarget = root.querySelector("input:not([type=hidden]):not([type=date]),textarea");
+  if (focusTarget && !options.noFocus) window.setTimeout(() => { try { focusTarget.focus({ preventScroll: true }); } catch (err) {} }, 90);
+  return root;
+}
+
+function closeModal() {
+  const root = $("#modalRoot");
+  if (root) root.innerHTML = "";
+  document.body.style.overflow = "";
+  ui.timerModalFor = null;
+  ui.modalLocked = false;
+}
+
+function sheetCloseButton() {
+  return `<button class="sheet-close" data-action="close-modal" aria-label="закрыть"><svg><use href="#i-x"/></svg></button>`;
+}
+
+function openConfirm(title, text, primaryLabel, onPrimary, options = {}) {
+  const root = openModal(`
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <div>
+        <p class="sheet-kicker">спокойный шаг</p>
+        <h2 class="sheet-title">${escapeHTML(title)}</h2>
+      </div>
+      ${sheetCloseButton()}
+    </div>
+    <p class="sheet-note" style="text-align:left;margin-top:0">${escapeHTML(text)}</p>
+    <div class="sheet-actions">
+      <button class="btn btn-secondary" data-confirm-cancel>${escapeHTML(options.secondary || "оставить как есть")}</button>
+      <button class="btn ${options.danger ? "btn-danger" : "btn-primary"}" data-confirm-primary>${escapeHTML(primaryLabel)}</button>
+    </div>`);
+  if (!root) return;
+  const cancel = root.querySelector("[data-confirm-cancel]");
+  const primary = root.querySelector("[data-confirm-primary]");
+  cancel?.addEventListener("click", closeModal);
+  primary?.addEventListener("click", () => {
+    closeModal();
+    if (onPrimary) onPrimary();
+  });
+}
+
+function openTimerFinished(running) {
+  if (!running || ui.timerModalFor === running.startedAt) return;
+  ui.timerModalFor = running.startedAt;
+  const root = openModal(`
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <div>
+        <p class="sheet-kicker">${humanDate(new Date())} · ${formatEnd(running.endAt)}</p>
+        <h2 class="sheet-title">время вышло</h2>
+      </div>
+    </div>
+    <p class="sheet-note" style="text-align:left;margin-top:0">«${escapeHTML(running.stepTitle)}» · ${running.minutes} мин. что дальше, без спешки?</p>
+    <div class="summary-grid" style="margin-top:15px">
+      <div class="summary-cell"><small>таймер</small><strong>${running.minutes}<em>мин</em></strong></div>
+      <div class="summary-cell"><small>сейчас</small><strong>${formatEnd(running.endAt)}</strong></div>
+    </div>
+    <div class="sheet-actions">
+      <button class="btn btn-secondary" id="timerBreakBtn">перерыв</button>
+      <button class="btn btn-primary" id="timerDoneBtn">выполнено</button>
+      <button class="btn btn-secondary" id="timerSkipBtn">не сегодня</button>
+    </div>
+    <p class="sheet-note">перерыв 10 минут. задача останется на месте.</p>`, { locked: true });
+  if (!root) return;
+  root.querySelector("#timerBreakBtn")?.addEventListener("click", () => startBreak(10));
+  root.querySelector("#timerDoneBtn")?.addEventListener("click", () => {
+    closeModal();
+    completeStep(running.taskId, running.stepId, { minutes: running.minutes });
+  });
+  root.querySelector("#timerSkipBtn")?.addEventListener("click", () => {
+    closeModal();
+    const entry = findEntry(running.taskId, running.stepId);
+    if (entry) skipEntry(entry, "timer");
+  });
+}
+
+function openEndDay() {
+  const log = todayLog();
+  const delta = Math.round((state.honor - Number(log.honorStart || state.honor)) * 10) / 10;
+  const video = videoProgress();
+  const release = releaseInfo();
+  const doneItems = log.done.slice().reverse();
+  const reward = !log.ended && doneItems.length > 0 ? 2 : 0;
+  const root = openModal(`
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <div>
+        <p class="sheet-kicker">${humanDate(new Date())}</p>
+        <h2 class="sheet-title">итоги дня</h2>
+      </div>
+      ${sheetCloseButton()}
+    </div>
+    <div class="summary-hero">
+      <div class="summary-big">${doneItems.length} ${plural(doneItems.length, ["шаг","шага","шагов"])}</div>
+      <p class="summary-caption">${doneItems.length ? "сделано за сегодня. этого достаточно." : "пока без шагов. можно начать с одного небольшого."}</p>
+    </div>
+    <div class="summary-grid">
+      <div class="summary-cell"><small>время в работе</small><strong>${Number(log.minutes) || 0}<em>мин</em></strong></div>
+      <div class="summary-cell"><small>честь за день</small><strong style="color:${delta < 0 ? "var(--neg)" : "var(--on-hero)"}">${delta > 0 ? "+" : ""}${Math.round(delta)}</strong></div>
+      <div class="summary-cell"><small>шагов до выхода</small><strong>${video.remaining}<em>из ${video.total}</em></strong></div>
+      <div class="summary-cell"><small>дней до выхода</small><strong>${release.days ?? 0}</strong></div>
+    </div>
+    ${doneItems.length ? `<div class="done-mini-list">${doneItems.slice(0, 8).map(item => `<div class="done-mini-row"><span>${escapeHTML(item.title)}</span><span>${item.minutes} мин</span></div>`).join("")}</div>` : ""}
+    <div class="sheet-actions">
+      <button class="btn btn-secondary" data-action="close-modal">${log.ended ? "закрыть" : "ещё поработаю"}</button>
+      <button class="btn btn-primary" id="endDayConfirm">${log.ended ? "хорошо" : "закрыть день"}</button>
+    </div>
+    <p class="sheet-note">${log.ended ? "день уже закрыт. данные сохранены." : reward ? "за закрытый день +2 к чести." : "без шагов честь не меняется. можно просто закрыть день."}</p>`);
+  if (!root) return;
+  root.querySelector("#endDayConfirm")?.addEventListener("click", () => {
+    if (!log.ended) {
+      log.ended = true;
+      if (reward) {
+        adjustHonor(reward, 1);
+        showToast("день закрыт. +2 к чести.");
+      } else {
+        showToast("день закрыт. завтра можно начать с одного шага.");
+      }
+      save();
+    }
+    closeModal();
+    renderAll();
+  });
+}
+
+function openTaskEditor(taskId = null) {
+  const task = taskId ? state.tasks.find(t => t.id === taskId) : null;
+  const isVideo = task ? task.source === "video" : false;
+  const type = task ? task.type : "timer";
+  const duration = task ? Number(task.minutes) || 35 : 35;
+  const root = openModal(`
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <div>
+        <p class="sheet-kicker">${task ? isVideo ? "блок плана видео" : "моя задача" : "новая задача"}</p>
+        <h2 class="sheet-title">${task ? "изменить задачу" : "добавить задачу"}</h2>
+      </div>
+      ${sheetCloseButton()}
+    </div>
+    <form id="taskForm">
+      <div class="field">
+        <label class="field-label" for="taskTitle">название</label>
+        <input class="field-input" id="taskTitle" type="text" maxlength="120" required placeholder="например, снять уличные биролы" value="${task ? escapeHTML(task.title) : ""}">
+      </div>
+      <div class="field">
+        <span class="field-label">тип</span>
+        <div class="type-row" data-type-group>
+          <button type="button" class="type-pill ${type === "timer" ? "active" : ""}" data-type="timer">таймер</button>
+          <button type="button" class="type-pill ${type === "shot" ? "active" : ""}" data-type="shot">снято</button>
+          <button type="button" class="type-pill ${type === "day" ? "active" : ""}" data-type="day">на день</button>
+        </div>
+        <input type="hidden" id="taskType" value="${type}">
+      </div>
+      <div class="field-row">
+        <div class="field" id="taskDurationField" ${type !== "timer" ? "hidden" : ""}>
+          <label class="field-label" for="taskDuration">длительность, минут</label>
+          <input class="field-input" id="taskDuration" type="number" min="5" max="300" step="5" value="${duration}">
+        </div>
+        <div class="field">
+          <label class="field-label" for="taskNote">короткая заметка</label>
+          <input class="field-input" id="taskNote" type="text" maxlength="180" placeholder="зачем и что важно" value="${task ? escapeHTML(task.note || "") : ""}">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="taskSteps">шаги внутри, по одному в строке</label>
+        <textarea class="field-textarea" id="taskSteps" placeholder="один шаг&#10;второй шаг">${task ? escapeHTML(task.steps.map(s => s.title).join("\n")) : ""}</textarea>
+      </div>
+      <p class="error-text" id="taskError"></p>
+      <div class="sheet-actions">
+        <button type="button" class="btn btn-secondary" data-action="close-modal">отмена</button>
+        <button type="submit" class="btn btn-primary">${task ? "сохранить" : "добавить"}</button>
+      </div>
+    </form>
+    ${task && !isVideo ? `<div class="sheet-divider"></div><div style="text-align:center"><button class="tiny-link" id="deleteTaskBtn">удалить задачу</button></div>` : ""}
+    ${task && isVideo ? `<p class="sheet-note">этот блок входит в шаблон видео. шаги можно менять, а убрать весь план можно в разделе «план видео».</p>` : ""}`);
+  if (!root) return;
+  const form = root.querySelector("#taskForm");
+  const hiddenType = root.querySelector("#taskType");
+  const durationField = root.querySelector("#taskDurationField");
+  root.querySelector("[data-type-group]")?.addEventListener("click", event => {
+    const btn = event.target.closest("[data-type]");
+    if (!btn) return;
+    hiddenType.value = btn.dataset.type;
+    durationField.hidden = btn.dataset.type !== "timer";
+    root.querySelectorAll(".type-pill").forEach(p => p.classList.toggle("active", p === btn));
+  });
+  root.querySelector("#deleteTaskBtn")?.addEventListener("click", () => {
+    if (!task) return;
+    closeModal();
+    openConfirm("удалить задачу?", `«${task.title}» и её шаги исчезнут с этого устройства. идеи и другие задачи останутся.`, "удалить", () => {
+      state.tasks = state.tasks.filter(t => t.id !== task.id);
+      if (state.focus && task.steps.some(s => s.id === state.focus)) state.focus = null;
+      if (state.running && state.running.taskId === task.id) { state.running = null; releaseWakeLock(); }
+      save();
+      renderAll();
+      showToast("задача убрана.");
+    }, { danger: true, secondary: "оставить" });
+  });
+  form?.addEventListener("submit", event => {
+    event.preventDefault();
+    const titleValue = $("#taskTitle", root).value.trim();
+    const noteValue = $("#taskNote", root).value.trim();
+    const typeValue = hiddenType.value;
+    const minutesValue = Math.max(5, Math.min(300, Number($("#taskDuration", root)?.value) || 35));
+    const stepsValue = $("#taskSteps", root).value;
+    const error = $("#taskError", root);
+    if (!titleValue) {
+      if (error) { error.textContent = "нужно название, хотя бы короткое."; error.classList.add("show"); }
+      return;
+    }
+    const oldSteps = task ? task.steps : [];
+    let lines = stepsValue.split(/\n+/).map(line => line.trim()).filter(Boolean);
+    if (!lines.length) lines = [titleValue];
+    if (task && task.steps.length === 1 && lines.length === 1 && lines[0] === task.steps[0].title) lines = [titleValue];
+    const newSteps = lines.map((line, i) => {
+      const old = oldSteps[i];
+      return {
+        id: old ? old.id : uid("step"),
+        title: line,
+        note: old ? old.note || "" : "",
+        done: old ? !!old.done : false,
+        doneAt: old ? old.doneAt || null : null,
+        helper: old ? !!old.helper : false,
+        weather: old ? !!old.weather : false
+      };
+    });
+    let target = task;
+    if (!target) {
+      target = {
+        id: uid("task"),
+        phase: "моё",
+        title: titleValue,
+        note: noteValue,
+        source: "custom",
+        type: typeValue,
+        minutes: minutesValue,
+        order: state.tasks.length + 10,
+        createdAt: new Date().toISOString(),
+        steps: newSteps
+      };
+      state.tasks.push(target);
+      if (!state.running) state.focus = target.steps.find(s => !s.done)?.id || null;
+    } else {
+      target.title = titleValue;
+      target.note = noteValue;
+      target.type = typeValue;
+      target.minutes = minutesValue;
+      target.steps = newSteps;
+    }
+    const validIds = new Set(state.tasks.flatMap(t => t.steps.map(s => s.id)));
+    if (state.focus && !validIds.has(state.focus)) state.focus = null;
+    if (state.running && !findEntry(state.running.taskId, state.running.stepId)) { state.running = null; releaseWakeLock(); }
+    markActivity();
+    save();
+    closeModal();
+    renderAll();
+    showToast(task ? "задача обновлена." : "задача добавлена в очередь.");
+  });
+}
+
+function openIdeaModal() {
+  const root = openModal(`
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <div>
+        <p class="sheet-kicker">чтобы не потерять</p>
+        <h2 class="sheet-title">быстрая идея</h2>
+      </div>
+      ${sheetCloseButton()}
+    </div>
+    <form id="ideaModalForm">
+      <div class="field">
+        <label class="field-label" for="ideaModalInput">одна строка, этого достаточно</label>
+        <input class="field-input" id="ideaModalInput" type="text" maxlength="240" required placeholder="например, видео про старые картриджи">
+      </div>
+      <div class="sheet-actions">
+        <button type="button" class="btn btn-secondary" data-action="close-modal">отмена</button>
+        <button type="submit" class="btn btn-primary">сохранить</button>
+      </div>
+    </form>
+    <p class="sheet-note">идеи хранятся на этом устройстве. можно вернуться к ним позже.</p>`);
+  if (!root) return;
+  root.querySelector("#ideaModalForm")?.addEventListener("submit", event => {
+    event.preventDefault();
+    const value = $("#ideaModalInput", root).value.trim();
+    if (!value) return;
+    addIdea(value);
+    closeModal();
+    showToast("идея сохранена.");
+  });
+}
+
+function addIdea(text) {
+  const value = String(text || "").trim();
+  if (!value) return false;
+  state.ideas.unshift({ id: uid("idea"), text: value, createdAt: new Date().toISOString() });
+  save();
+  renderIdeas();
+  renderHeader();
+  return true;
+}
+
+function openVideoEditor(mode = "replan") {
+  if (!state.video) return;
+  const isReplan = mode === "replan";
+  const root = openModal(`
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <div>
+        <p class="sheet-kicker">${isReplan ? "оставшиеся шаги распределятся заново" : "название и дата выхода"}</p>
+        <h2 class="sheet-title">${isReplan ? "пересобрать план" : "настройки ролика"}</h2>
+      </div>
+      ${sheetCloseButton()}
+    </div>
+    <form id="videoPlanForm">
+      <div class="field">
+        <label class="field-label" for="videoPlanTitle">название ролика</label>
+        <input class="field-input" id="videoPlanTitle" type="text" maxlength="120" value="${escapeHTML(state.video.title)}" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="videoPlanDate">новая дата выхода</label>
+        <input class="field-input" id="videoPlanDate" type="date" min="${todayISO()}" value="${state.video.releaseDate}">
+      </div>
+      <p class="error-text" id="videoPlanError"></p>
+      <div class="sheet-actions">
+        <button type="button" class="btn btn-secondary" data-action="close-modal">отмена</button>
+        <button type="submit" class="btn btn-primary">${isReplan ? "пересобрать" : "сохранить"}</button>
+      </div>
+    </form>
+    <p class="sheet-note">${isReplan ? "готовые шаги не потеряются. оставшиеся лягут на будни до новой даты." : "дата выхода меняет только распределение оставшихся шагов по будням."}</p>`);
+  if (!root) return;
+  root.querySelector("#videoPlanForm")?.addEventListener("submit", event => {
+    event.preventDefault();
+    const title = $("#videoPlanTitle", root).value.trim();
+    const date = $("#videoPlanDate", root).value;
+    const error = $("#videoPlanError", root);
+    if (!title || !date) {
+      if (error) { error.textContent = "нужны название и дата будущего дня."; error.classList.add("show"); }
+      return;
+    }
+    if (daysBetween(todayISO(), date) < 0) {
+      if (error) { error.textContent = "дата уже прошла. выбери день впереди."; error.classList.add("show"); }
+      return;
+    }
+    state.video.title = title;
+    state.video.releaseDate = date;
+    save();
+    closeModal();
+    renderAll();
+    showToast(isReplan ? "план пересобран. шаги снова разложены по будням." : "дата и название обновлены.");
+  });
+}
+
+function createVideoPlan(title, releaseDate) {
+  const custom = state.tasks.filter(t => t.source !== "video");
+  state.tasks = [...baseVideoTasks(), ...custom];
+  state.video = {
+    id: uid("video"),
+    title,
+    releaseDate,
+    createdAt: new Date().toISOString()
+  };
+  state.focus = null;
+  if (state.running) { state.running = null; releaseWakeLock(); }
+  state.skipped = { date: todayISO(), ids: [] };
+  state.notTodayCount = 0;
+  markActivity();
+  save();
+  renderAll();
+  setView("video");
+}
+
+function confirmNewVideo() {
+  openConfirm("собрать другой ролик?", "текущий план и прогресс его шагов заменятся. свои задачи и идеи останутся. это можно сделать спокойно.", "собрать новый", () => {
+    state.tasks = state.tasks.filter(t => t.source !== "video");
+    state.video = null;
+    state.focus = null;
+    if (state.running) { state.running = null; releaseWakeLock(); }
+    state.skipped = { date: todayISO(), ids: [] };
+    markActivity();
+    save();
+    renderAll();
+    setView("video");
+    showToast("впиши название и дату, план соберётся сам.");
+  }, { secondary: "оставить текущий" });
+}
+
+function resetEverything() {
+  openConfirm("сбросить данные?", "задачи, честь и идеи на этом устройстве удалятся. приложение вернётся к первому примеру. это необратимо.", "сбросить", () => {
+    localStorage.removeItem(STORAGE_KEY);
+    state = seedState();
+    state.firstRun = false;
+    state.theme = document.documentElement.getAttribute("data-theme") || "dark";
+    save();
+    renderAll();
+    setView("today");
+    showToast("данные сброшены. это снова пример, меняй под себя.");
+  }, { danger: true, secondary: "не сбрасывать" });
+}
+
+function adjustTimer(delta) {
+  if (!state.running) return;
+  const now = Date.now();
+  const base = Math.max(now, state.running.endAt);
+  const newEnd = Math.max(now + 60000, base + Number(delta) * 60000);
+  state.running.endAt = newEnd;
+  state.running.minutes = Math.max(1, Math.round((newEnd - state.running.startedAt) / 60000));
+  save();
+  renderToday();
+  renderMiniTimer();
+  showToast(delta > 0 ? `добавил ${delta} минут. без спешки.` : "сократил таймер. можно и так.");
+}
+
+function toggleTaskCard(button) {
+  const card = button.closest(".task-card");
+  if (!card) return;
+  const taskId = card.dataset.taskCard;
+  const closed = card.classList.contains("collapsed");
+  if (closed) {
+    card.classList.remove("collapsed");
+    ui.userClosed.delete(taskId);
+    ui.userOpen.add(taskId);
+  } else {
+    card.classList.add("collapsed");
+    ui.userOpen.delete(taskId);
+    ui.userClosed.add(taskId);
+  }
+  const chevron = card.querySelector(".task-title svg:last-child");
+  if (chevron) chevron.style.transform = `rotate(${closed ? "180deg" : "0deg"})`;
+}
+
+document.addEventListener("click", event => {
+  const nav = event.target.closest("[data-nav]");
+  if (nav) {
+    navTo(nav.dataset.nav);
+    return;
+  }
+  const trigger = event.target.closest("[data-action]");
+  if (!trigger) return;
+  const action = trigger.dataset.action;
+  const taskId = trigger.dataset.task;
+  const stepId = trigger.dataset.step;
+  if (action === "start") { startTask(taskId, stepId); return; }
+  if (action === "complete-step") { completeStep(taskId, stepId); return; }
+  if (action === "task-primary") {
+    startTask(taskId, stepId);
+    return;
+  }
+  if (action === "complete-early") {
+    const running = state.running;
+    if (running) {
+      const elapsed = Math.max(1, Math.round((Date.now() - running.startedAt) / 60000));
+      closeModal();
+      completeStep(running.taskId, running.stepId, { minutes: Math.min(running.minutes, elapsed) });
+    }
+    return;
+  }
+  if (action === "complete-running") {
+    const running = state.running;
+    if (running) {
+      closeModal();
+      completeStep(running.taskId, running.stepId, { minutes: running.minutes });
+    }
+    return;
+  }
+  if (action === "not-today") {
+    const entry = findEntry(taskId, stepId);
+    if (entry) skipEntry(entry);
+    return;
+  }
+  if (action === "adjust-timer") { adjustTimer(Number(trigger.dataset.delta) || 5); return; }
+  if (action === "open-end-day") { openEndDay(); return; }
+  if (action === "add-task") { openTaskEditor(); return; }
+  if (action === "edit-task") { openTaskEditor(taskId); return; }
+  if (action === "toggle-task") { toggleTaskCard(trigger); return; }
+  if (action === "replan") { openVideoEditor("replan"); return; }
+  if (action === "edit-video") { openVideoEditor("edit"); return; }
+  if (action === "new-video") { confirmNewVideo(); return; }
+  if (action === "close-modal") { closeModal(); return; }
+  if (action === "clear-break") { clearBreak(); return; }
+  if (action === "break-return") {
+    clearBreak();
+    setView("today");
+    renderAll();
+    return;
+  }
+  if (action === "idea-delete") {
+    const ideaId = trigger.dataset.idea;
+    state.ideas = state.ideas.filter(i => i.id !== ideaId);
+    save();
+    renderIdeas();
+    renderHeader();
+    showToast("идея убрана.");
+    return;
+  }
+  if (action === "idea-use") {
+    const idea = state.ideas.find(i => i.id === trigger.dataset.idea);
+    if (!idea) return;
+    if (state.video && !isVideoComplete()) {
+      showToast("план уже идёт. идея останется в запасе.");
+      return;
+    }
+    if (state.video && isVideoComplete()) {
+      openConfirm("начать новый ролик?", `идея «${idea.text}» станет новым планом. прогресс прошлого ролика заменится, свои задачи и идеи останутся.`, "собрать план", () => {
+        createVideoPlan(idea.text, defaultReleaseDate());
+        showToast("план собран по идее. дату можно поменять.");
+      }, { secondary: "пусть лежит" });
+    } else {
+      createVideoPlan(idea.text, defaultReleaseDate());
+      showToast("план собран по идее. дату можно поменять.");
+    }
+    return;
+  }
+});
+
+document.addEventListener("submit", event => {
+  const form = event.target;
+  if (form.id === "videoCreateForm") {
+    event.preventDefault();
+    const title = $("#videoCreateTitle", form)?.value.trim();
+    const date = $("#videoCreateDate", form)?.value;
+    const error = $("#videoCreateError");
+    if (!title) {
+      if (error) { error.textContent = "нужно название, хотя бы рабочее."; error.classList.add("show"); }
+      return;
+    }
+    if (!date || daysBetween(todayISO(), date) < 0) {
+      if (error) { error.textContent = "выбери дату выхода впереди."; error.classList.add("show"); }
+      return;
+    }
+    createVideoPlan(title, date);
+    showToast("план собран. шаги распределены по будням.");
+  }
+});
+
+$("#fabTheme")?.addEventListener("click", toggleTheme);
+$("#fabIdea")?.addEventListener("click", openIdeaModal);
+$("#fabAdd")?.addEventListener("click", () => openTaskEditor());
+$("#addTaskBtn")?.addEventListener("click", () => openTaskEditor());
+$("#endDayBtn")?.addEventListener("click", openEndDay);
+$("#resetData")?.addEventListener("click", resetEverything);
+$("#tasksFilters")?.addEventListener("click", event => {
+  const btn = event.target.closest("[data-filter]");
+  if (!btn) return;
+  ui.filter = btn.dataset.filter;
+  renderTasks();
+});
+
+$("#quickIdeaForm")?.addEventListener("submit", event => {
+  event.preventDefault();
+  const input = $("#quickIdeaInput");
+  if (!input) return;
+  if (addIdea(input.value)) {
+    input.value = "";
+    showToast("идея сохранена.");
+  }
+});
+$("#ideasForm")?.addEventListener("submit", event => {
+  event.preventDefault();
+  const input = $("#ideasInput");
+  if (!input) return;
+  if (addIdea(input.value)) {
+    input.value = "";
+    showToast("идея сохранена.");
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && $("#modalRoot")?.innerHTML && !ui.modalLocked) closeModal();
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    const changed = rollover();
+    if (changed) renderAll();
+    else { renderHonor(); renderToday(); renderStats(); renderIdeas(); }
+    tick();
+    if (state.running) requestWakeLock();
+  }
+});
+window.addEventListener("focus", () => {
+  const changed = rollover();
+  if (changed) renderAll();
+  else { renderHonor(); renderStats(); renderToday(); }
+  tick();
+});
+window.addEventListener("beforeunload", save);
+
+function init() {
+  setTheme(state.theme, false);
+  setupPWA();
+  rollover();
+  renderAll();
+  setInterval(tick, 1000);
+  window.setTimeout(tick, 250);
+  if (state.firstRun) {
+    state.firstRun = false;
+    save();
+    window.setTimeout(() => showToast("это пример плана. меняй под себя, всё хранится на устройстве.", 4600), 900);
+  }
+}
+init();
+
+</script>
+</body>
+</html>
