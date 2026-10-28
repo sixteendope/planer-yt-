@@ -94,7 +94,22 @@ body::after{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 button,input,textarea,select{font:inherit;color:inherit}
-button{cursor:pointer;border:0;background:none;padding:0}
+button{cursor:pointer;border:0;background:none;padding:0;touch-action:manipulation}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes softPop{0%{opacity:0;transform:scale(.97)}100%{opacity:1;transform:scale(1)}}
+.topbar{animation:fadeUp .65s var(--ease) both}
+.honor-card{animation:fadeUp .7s .06s var(--ease) both}
+.pills{animation:fadeUp .7s .12s var(--ease) both}
+.view:not([hidden]) > *{animation:fadeUp .62s var(--ease) both}
+.view:not([hidden]) > *:nth-child(1){animation-delay:.14s}
+.view:not([hidden]) > *:nth-child(2){animation-delay:.2s}
+.view:not([hidden]) > *:nth-child(3){animation-delay:.26s}
+.view:not([hidden]) > *:nth-child(4){animation-delay:.32s}
+.view:not([hidden]) > *:nth-child(5){animation-delay:.38s}
+footer{animation:fadeUp .7s .3s var(--ease) both}
+.hero{animation:softPop .7s var(--ease) both}
+.sheet{will-change:transform}
 h1,h2,h3,h4,p{margin:0}
 a{color:inherit}
 svg{display:block}
@@ -515,8 +530,10 @@ footer{
 }
 .mini-timer-btn svg{width:14px;height:14px}
 .mini-timer-btn.ghost{background:var(--tag);color:var(--muted);box-shadow:none}
-.modal-root{position:fixed;inset:0;z-index:100}
+.modal-root{position:fixed;inset:0;z-index:100;pointer-events:none}
+.modal-root:empty{display:none}
 .modal-backdrop{
+  pointer-events:auto;
   position:absolute;inset:0;background:var(--scrim);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   display:flex;align-items:flex-end;justify-content:center;padding:0;animation:backIn .25s ease both;
   overflow-y:auto;
