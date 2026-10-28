@@ -65,16 +65,17 @@ html[data-theme="light"]{
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
-html{background:var(--bg);scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html{background:var(--bg);scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior:none}
 body{
-  margin:0;min-height:100dvh;background:var(--bg);color:var(--text);
+  margin:0;min-height:100svh;background:var(--bg);color:var(--text);
   font-family:var(--font);letter-spacing:-.03em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   transition:background-color .35s ease,color .35s ease;overflow-x:hidden;
+  overscroll-behavior-y:none;
 }
 body::before{
-  content:"";position:fixed;left:0;right:0;top:-160px;height:560px;z-index:0;pointer-events:none;
-  background:radial-gradient(55% 60% at 50% 20%,var(--glow),transparent 72%);
-  opacity:.8;transition:background .35s;
+  content:"";position:fixed;left:-20%;right:-20%;top:-24%;height:72vh;z-index:0;pointer-events:none;
+  background:radial-gradient(50% 52% at 50% 40%,var(--glow),transparent 76%);
+  opacity:.75;transition:background .35s;
 }
 button,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none;padding:0;touch-action:manipulation}
@@ -86,9 +87,9 @@ svg{display:block}
   padding:calc(16px + env(safe-area-inset-top)) 18px calc(40px + env(safe-area-inset-bottom));
 }
 .head{min-height:92px;padding-right:152px;display:flex;align-items:flex-end}
-.head h1{font-size:40px;line-height:.94;font-weight:800;letter-spacing:-.045em;word-break:break-word}
+.head h1{font-size:40px;line-height:.94;font-weight:800;letter-spacing:-.045em;word-break:break-word;animation:softBlur .5s var(--ease) both}
 .head-sub{margin-top:9px;font-size:17px;line-height:1.1;font-weight:600;color:var(--muted);letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fabs{position:absolute;top:calc(41px + env(safe-area-inset-top));right:16px;z-index:70;display:flex;gap:8px}
+.fabs{position:fixed;top:calc(41px + env(safe-area-inset-top));right:16px;z-index:70;display:flex;gap:8px}
 .fab{
   width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--text);
   background:var(--fab);border:1px solid var(--fab-border);
@@ -99,8 +100,8 @@ svg{display:block}
 .fab:active{transform:scale(.92)}
 .fab.solid{background:var(--fab-solid);color:var(--fab-solid-text);border-color:transparent;box-shadow:0 0 26px var(--glow)}
 .fab.solid svg{width:19px;height:19px}
-.semi{width:19px;height:21px;border-radius:100% 0 0 100%;border:1.6px solid currentColor;border-right:0;background:linear-gradient(180deg,currentColor 0 50%,transparent 50%);transform:rotate(-16deg);transition:transform .55s var(--ease)}
-html[data-theme="light"] .semi{transform:rotate(164deg)}
+.theme-fab svg{width:21px;height:21px;transition:transform .5s var(--ease)}
+html[data-theme="light"] .theme-fab svg{transform:rotate(180deg)}
 .back-pill{
   display:inline-flex;align-items:center;gap:5px;height:38px;padding:0 15px 0 11px;margin-top:16px;
   background:var(--card);border-radius:999px;font-size:13.5px;font-weight:650;color:var(--text);
@@ -146,6 +147,9 @@ html[data-theme="light"] .honor-track::before{background-image:repeating-linear-
 .eyebrow{font-size:12px;font-weight:750;color:var(--on-white-muted);letter-spacing:-.005em}
 .type-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:650;color:var(--on-white-muted);white-space:nowrap}
 .type-chip svg{width:12px;height:12px}
+.white-card.nextable{cursor:pointer}
+.white-card{animation:cardSwap .5s var(--ease) both}
+@keyframes cardSwap{from{opacity:0;filter:blur(12px);transform:translateY(12px) scale(.994)}to{opacity:1;filter:blur(0);transform:none}}
 .white-title{
   margin-top:15px;font-size:clamp(32px,9.4vw,41px);line-height:1;font-weight:790;
   letter-spacing:-.045em;overflow-wrap:anywhere;text-wrap:balance;
@@ -250,7 +254,7 @@ footer{margin-top:36px;text-align:center}
 .empty p{font-size:13px;font-weight:550;color:var(--muted);line-height:1.4;margin:8px auto 0;max-width:250px}
 .empty .card-btn{margin-top:18px}
 .mini{
-  position:fixed;z-index:80;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);
+  position:fixed;z-index:80;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);
   width:min(calc(100% - 32px),380px);background:var(--pill);color:var(--pill-text);border-radius:999px;
   padding:7px 7px 7px 17px;display:flex;align-items:center;gap:10px;
   box-shadow:0 14px 40px rgba(0,0,0,.4),0 0 30px var(--glow);animation:miniIn .35s var(--spring) both;
@@ -282,10 +286,16 @@ footer{margin-top:36px;text-align:center}
 .field{margin-top:12px}
 .field label{display:block;font-size:11.5px;font-weight:700;color:var(--sheet-muted);margin:0 4px 7px}
 .input{
-  width:100%;min-height:52px;border-radius:16px;border:1px solid transparent;background:var(--sheet-field);
+  display:block;width:100%;max-width:100%;min-width:0;min-height:52px;border-radius:16px;
+  border:1px solid transparent;background:var(--sheet-field);
   color:var(--sheet-text);font-size:16px;font-weight:550;letter-spacing:-.025em;padding:12px 15px;outline:none;
   transition:border-color .2s,background .2s;
+  -webkit-appearance:none;appearance:none;
 }
+.input[type="date"]{text-align:left;line-height:normal}
+.input[type="date"]::-webkit-date-and-time-value{text-align:left;min-width:0}
+.input[type="number"]{text-align:left}
+.white-card{overflow:hidden}
 textarea.input{min-height:96px;resize:vertical;line-height:1.4}
 .input:focus{border-color:var(--sheet-line);background:var(--sheet-field)}
 .input::placeholder{color:var(--sheet-muted);opacity:.65}
@@ -358,6 +368,71 @@ body.is-booting .fabs .fab:nth-child(3){animation-delay:.22s}
   .scrim{align-items:center;padding:24px}
   .sheet{border-radius:30px;max-height:86dvh;padding-bottom:24px}
 }
+/* плавные переходы между экранами */
+.view{animation:viewBlur .5s var(--ease) both}
+@keyframes viewBlur{from{opacity:0;filter:blur(14px);transform:translateY(14px) scale(.994)}to{opacity:1;filter:blur(0);transform:none}}
+.screen-in .fabs .fab{animation:fabBlur .55s var(--ease) both}
+.screen-in .fabs .fab:nth-child(2){animation-delay:.05s}
+.screen-in .fabs .fab:nth-child(3){animation-delay:.1s}
+.screen-in .head h1,.screen-in .head-sub{animation:softBlur .5s var(--ease) both}
+.screen-in .head-sub{animation-delay:.05s}
+@keyframes softBlur{from{opacity:0;filter:blur(10px);transform:translateY(8px)}to{opacity:1;filter:blur(0);transform:none}}
+@keyframes fabBlur{from{opacity:0;filter:blur(9px);transform:scale(.84)}to{opacity:1;filter:blur(0);transform:none}}
+.rows>.task,.rows>.queue-row,.rows>.idea-row,.queue-head,.plan-links,.empty{animation:viewBlur .45s var(--ease) both}
+.rows>*:nth-child(2){animation-delay:.035s}
+.rows>*:nth-child(3){animation-delay:.07s}
+.rows>*:nth-child(4){animation-delay:.105s}
+.rows>*:nth-child(5){animation-delay:.14s}
+.rows>*:nth-child(n+6){animation-delay:.17s}
+::view-transition-old(root){animation:vtOld .32s var(--ease) both}
+::view-transition-new(root){animation:vtNew .45s var(--ease) both}
+@keyframes vtOld{to{opacity:0;filter:blur(12px);transform:scale(.985)}}
+@keyframes vtNew{from{opacity:0;filter:blur(16px);transform:translateY(16px) scale(.99)}to{opacity:1;filter:blur(0);transform:none}}
+/* компактный первый экран, чтобы всё помещалось */
+body.fit-view{overflow:hidden}
+body.fit-view .shell{height:100svh;display:flex;flex-direction:column;padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+body.fit-view main{flex:1;min-height:0;display:flex;flex-direction:column}
+body.fit-view footer{margin-top:auto;padding-top:12px}
+body.fit-view .head{min-height:74px}
+body.fit-view .head h1{font-size:36px}
+body.fit-view .head-sub{font-size:15.5px;margin-top:6px}
+body.fit-view .honor{margin-top:14px;padding:15px 18px 17px}
+body.fit-view .white-card{margin-top:10px;padding:18px 18px 16px}
+body.fit-view .white-title{font-size:clamp(29px,8.6vw,36px)}
+body.fit-view .white-rule{margin:14px 0 12px}
+body.fit-view .card-btn{margin-top:14px;height:50px}
+body.fit-view .under-link{margin-top:8px}
+body.fit-view .wide-card{margin-top:9px;padding:11px 14px}
+body.fit-view .donut{width:54px;height:54px}
+body.fit-view .donut-hole{width:38px;height:38px;font-size:10px}
+body.fit-view .links{margin-top:14px}
+body.fit-view .links button{font-size:16px;padding:7px 4px}
+body.fit-view .timer-line{margin-top:12px}
+body.fit-view footer .copy{font-size:11.5px}
+body.bare .honor,body.bare .links,body.bare .wide-card,body.bare .fabs{display:none!important}
+body.running-now.fit-view .wide-card{display:none}
+body.bare .shell{justify-content:flex-start}
+body.bare main{display:flex;flex-direction:column;justify-content:center;padding-bottom:8vh}
+.under-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px}
+.under-row .under-link{margin:0;font-size:12.5px}
+.under-row .under-link.next{color:var(--on-white);display:inline-flex;align-items:center;gap:3px}
+.under-row .under-link.next svg{width:12px;height:12px}
+.reset-small{display:block;margin:22px auto 0;padding:6px 10px;font-size:11.5px;font-weight:650;color:var(--faint);transition:color .2s}
+.reset-small:active{color:var(--danger)}
+@media(max-height:760px){
+  body.fit-view .head{min-height:64px}
+  body.fit-view .head h1{font-size:32px}
+  body.fit-view .honor{padding:12px 16px 14px;margin-top:10px}
+  body.fit-view .white-card{padding:16px}
+  body.fit-view .white-title{font-size:27px}
+  body.fit-view .white-cols b{font-size:16px}
+  body.fit-view .white-rule{margin:11px 0 10px}
+  body.fit-view .card-btn{height:46px;margin-top:12px}
+  body.fit-view .wide-card{padding:9px 12px}
+  body.fit-view .links{margin-top:8px}
+  body.fit-view .timer-num{font-size:26px}
+  body.fit-view footer{margin-top:8px}
+}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 }
@@ -367,7 +442,8 @@ body.is-booting .fabs .fab:nth-child(3){animation-delay:.22s}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.6l2.8 6.2 6.6.6-5 4.5 1.5 6.5L12 17l-5.9 3.4 1.5-6.5-5-4.5 6.6-.6z" fill="currentColor"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
-  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M8.2 14.8a6 6 0 1111.6 0c-.7 1.2-1.8 2-1.8 3.2H8c0-1.2-1.1-2-1.8-3.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9.2 16.6a5.7 5.7 0 1 1 5.6 0c-.6.5-.9 1.1-.9 1.9h-3.8c0-.8-.3-1.4-.9-1.9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.3 21h3.4M12 1.8v1.3M3.4 4.6l.9.9M20.6 4.6l-.9.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h13M12.5 5.5L19 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5l11 6.5-11 6.5z" fill="currentColor"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -387,7 +463,9 @@ body.is-booting .fabs .fab:nth-child(3){animation-delay:.22s}
 </svg>
 
 <div class="fabs">
-  <button class="fab" id="themeBtn" aria-label="сменить тему"><span class="semi"></span></button>
+  <button class="fab theme-fab" id="themeBtn" aria-label="сменить тему">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 3.6a8.4 8.4 0 0 0 0 16.8z" fill="currentColor"/></svg>
+  </button>
   <button class="fab" id="ideasBtn" aria-label="идеи"><svg><use href="#i-bulb"/></svg></button>
   <button class="fab solid" id="addBtn" aria-label="добавить задачу"><svg><use href="#i-plus"/></svg></button>
 </div>
@@ -417,8 +495,8 @@ body.is-booting .fabs .fab:nth-child(3){animation-delay:.22s}
       <div id="mainMount"></div>
       <div id="progressMount"></div>
       <div class="links">
-        <button data-nav="tasks">задачи</button>
         <button data-nav="video">план</button>
+        <button data-nav="ideas">идеи</button>
         <button data-act="end-day">итоги</button>
       </div>
     </section>
@@ -440,7 +518,7 @@ body.is-booting .fabs .fab:nth-child(3){animation-delay:.22s}
     </section>
   </main>
 
-  <footer><button class="copy" id="copyright" title="нажми 5 раз, чтобы сбросить">sixteendope ©</button></footer>
+  <footer><p class="copy">sixteendope ©</p></footer>
 </div>
 
 <div id="miniMount"></div>
@@ -662,11 +740,45 @@ function currentEntry() {
   }
   return null;
 }
+function nextEntry() {
+  const skip = skippedSet();
+  const ordered = [...videoTasks(), ...state.tasks.filter(t => t.source !== "video")];
+  const list = [];
+  ordered.forEach(task => task.steps.forEach(step => {
+    if (!step.done && !skip.has(step.id)) list.push(step);
+  }));
+  if (!list.length) return;
+  const index = list.findIndex(step => step.id === state.focus);
+  const next = list[(index + 1) % list.length];
+  state.focus = next.id;
+  markActive();
+  save();
+  renderAll();
+}
 function logToday() {
   if (!state.dayLog || state.dayLog.date !== todayISO()) {
     state.dayLog = { date: todayISO(), honorStart: state.honor, done: [], minutes: 0, ended: false };
   }
   return state.dayLog;
+}
+function nakedState(theme) {
+  return {
+    theme: theme || "dark",
+    honor: 50,
+    honorStart: 50,
+    lastDelta: 0,
+    trend: 0,
+    lastOpen: todayISO(),
+    firstRun: false,
+    running: null,
+    breakUntil: null,
+    skipped: { date: todayISO(), ids: [] },
+    notToday: 0,
+    dayLog: { date: todayISO(), honorStart: 50, done: [], minutes: 0, ended: false },
+    video: null,
+    tasks: [],
+    ideas: []
+  };
 }
 function adjustHonor(delta) {
   state.honor = clamp(Math.round((state.honor + delta) * 10) / 10, 0, 100);
@@ -774,13 +886,36 @@ function renderHead() {
   }
   $("#viewSub").textContent = sub;
 }
-function setView(view) {
-  if (!VIEW_TITLES[view]) view = "today";
+function syncFit() {
+  const bare = !state.tasks.length && !state.video;
+  document.body.classList.toggle("bare", bare);
+  document.body.classList.toggle("running-now", !!state.running);
+  const fit = ui.view === "today" ||
+    (ui.view === "video" && !state.video) ||
+    (ui.view === "tasks" && !state.tasks.length) ||
+    (ui.view === "ideas" && !state.ideas.length);
+  document.body.classList.toggle("fit-view", fit);
+}
+function applyView(view) {
   ui.view = view;
   $$("[data-view]").forEach(el => { el.hidden = el.dataset.view !== view; });
+  document.body.dataset.view = view;
   $("#backBtn").hidden = view === "today";
   renderHead();
-  try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) { window.scrollTo(0, 0); }
+  syncFit();
+  document.body.classList.remove("screen-in");
+  void document.body.offsetWidth;
+  document.body.classList.add("screen-in");
+  try { window.scrollTo(0, 0); } catch (e) {}
+}
+function setView(view, options = {}) {
+  if (!VIEW_TITLES[view]) view = "today";
+  if (view === ui.view && !options.force) { syncFit(); return; }
+  const apply = () => applyView(view);
+  if (document.startViewTransition && ui.booted && !options.force) {
+    try { document.startViewTransition(apply); return; } catch (e) {}
+  }
+  apply();
 }
 function toast(text) {
   const root = $("#toasts");
@@ -823,14 +958,23 @@ function renderMain() {
   if (!mount) return;
   const entry = currentEntry();
   if (!entry) {
+    const isEmpty = !state.tasks.length && !state.video;
     const allDone = state.tasks.length > 0 && state.tasks.every(isDone);
-    const empty = state.tasks.length === 0;
+    if (isEmpty) {
+      mount.innerHTML = `
+        <article class="white-card">
+          <div class="white-top"><span class="eyebrow">планер ютуба</span></div>
+          <h2 class="white-title">начнём</h2>
+          <button class="card-btn" data-act="new-video">новый ролик</button>
+        </article>`;
+      return;
+    }
     mount.innerHTML = `
       <article class="white-card">
-        <div class="white-top"><span class="eyebrow">${empty ? "план видео" : allDone ? "готово" : "пауза"}</span></div>
-        <h2 class="white-title">${empty ? "начнём" : allDone ? "всё готово" : "на сегодня всё"}</h2>
-        <p class="white-sub">${empty ? "собери план или добавь свою задачу" : allDone ? "ролик можно выкладывать" : "отложенное ждёт в задачах"}</p>
-        <button class="card-btn" data-nav="${empty || allDone ? "video" : "tasks"}">${empty ? "собрать план" : allDone ? "новый ролик" : "открыть задачи"}</button>
+        <div class="white-top"><span class="eyebrow">${allDone ? "готово" : "пауза"}</span></div>
+        <h2 class="white-title">${allDone ? "всё готово" : "на сегодня всё"}</h2>
+        <p class="white-sub">${allDone ? "ролик можно выкладывать" : "отложенное ждёт в задачах"}</p>
+        <button class="card-btn" data-nav="${allDone ? "video" : "tasks"}">${allDone ? "новый ролик" : "открыть задачи"}</button>
       </article>`;
     return;
   }
@@ -842,10 +986,10 @@ function renderMain() {
   const action = run ? "finish-early" : timer ? "start" : "complete";
   const label = run ? "выполнено" : timer ? "начать" : task.type === "shot" ? "снято" : "сделано";
   mount.innerHTML = `
-    <article class="white-card">
+    <article class="white-card nextable" data-act="next" data-task="${task.id}" data-step="${step.id}" title="следующая задача">
       <div class="white-top">
         <span class="eyebrow">${esc(task.source === "video" ? task.phase : "сейчас")}</span>
-        <span class="type-chip"><svg><use href="#${typeIcon(task)}"/></svg>${typeText(task)}</span>
+        <span class="type-chip">${typeText(task)}</span>
       </div>
       <h2 class="white-title ${step.title.length > 28 ? "small-title" : ""}">${esc(step.title)}</h2>
       ${task.source !== "video" && step.title.trim().toLowerCase() !== task.title.trim().toLowerCase() ? `<p class="white-sub">${esc(task.title)}</p>` : ""}
@@ -863,7 +1007,10 @@ function renderMain() {
         <div><span>до выхода</span><b>${rel.days === null ? "без даты" : rel.label}</b></div>
       </div>
       <button class="card-btn" data-act="${action}" data-task="${task.id}" data-step="${step.id}">${label}</button>
-      <button class="under-link" data-act="not-today" data-task="${task.id}" data-step="${step.id}">не сегодня</button>
+      <div class="under-row">
+        <button class="under-link" data-act="not-today" data-task="${task.id}" data-step="${step.id}">не сегодня</button>
+        <button class="under-link next" data-act="next" data-task="${task.id}" data-step="${step.id}">следующая <svg><use href="#i-next"/></svg></button>
+      </div>
     </article>`;
 }
 
@@ -897,7 +1044,7 @@ function renderTasks() {
   const mount = $("#tasksMount");
   if (!mount) return;
   if (!state.tasks.length) {
-    mount.innerHTML = `<div class="empty"><h3>пока пусто</h3><p>добавь свою задачу или собери план видео.</p><button class="card-btn" style="background:var(--pill);color:var(--pill-text)" data-act="add">добавить задачу</button></div>`;
+    mount.innerHTML = `<div class="empty"><h3>пока пусто</h3><p>добавь задачу или начни новый ролик.</p><button class="card-btn" style="background:var(--pill);color:var(--pill-text)" data-act="add">добавить задачу</button><button class="reset-small" data-act="reset-all">сбросить все данные</button></div>`;
     return;
   }
   const current = currentEntry();
@@ -937,7 +1084,7 @@ function renderTasks() {
           </div>
         </div></div>
       </article>`;
-  }).join("") + `</div>`;
+  }).join("") + `</div><button class="reset-small" data-act="reset-all">сбросить все данные</button>`;
 }
 
 function renderVideo() {
@@ -1047,6 +1194,7 @@ function renderMini() {
 function renderAll() {
   const items = [renderHead, renderHonor, renderMain, renderProgress, renderTasks, renderVideo, renderIdeas, renderMini];
   items.forEach(fn => { try { fn(); } catch (e) { console.error(e); } });
+  syncFit();
 }
 
 function openSheet(html) {
@@ -1151,7 +1299,7 @@ function completeStep(taskId, stepId, actualMinutes) {
     setTimeout(() => { renderAll(); toast("шаг готов. блок собран."); }, 300);
   } else {
     renderAll();
-    toast("готово. +" + (task.type === "shot" ? 3 : 2) + " к чести");
+    toast("шаг готов");
   }
 }
 function finishRunning() {
@@ -1241,7 +1389,8 @@ function openEndDay() {
       <button class="secondary" data-act="close-sheet">закрыть</button>
       <button class="primary" id="closeDayBtn">${log.ended ? "хорошо" : "завершить день"}</button>
     </div>
-    <p class="hint">${log.ended ? "день уже закрыт" : "честь растёт за закрытый день"}</p>`);
+    <p class="hint">${log.ended ? "день уже закрыт" : "спокойно закрываем день"}</p>
+    <button class="reset-small" data-act="reset-all" style="margin-top:12px;color:var(--sheet-muted)">сбросить все данные</button>`);
   $("#closeDayBtn").addEventListener("click", () => {
     if (!log.ended) {
       log.ended = true;
@@ -1249,7 +1398,7 @@ function openEndDay() {
       save();
       closeSheet();
       renderAll();
-      toast("день закрыт. +2 к чести");
+      toast("день закрыт");
     } else {
       closeSheet();
     }
@@ -1399,22 +1548,30 @@ function createPlan(title) {
   state.focus = null;
   state.skipped = { date: todayISO(), ids: [] };
   state.notToday = 0;
+  if (!Number(state.honor)) {
+    state.honor = 50;
+    state.honorStart = 50;
+    if (state.dayLog) state.dayLog.honorStart = 50;
+  }
   markActive();
   save();
   renderAll();
   setView("video");
 }
 function resetAll() {
-  openConfirm("сбросить данные?", "задачи, честь и идеи исчезнут. приложение вернётся к примеру.", "сбросить", () => {
+  openConfirm("сбросить все данные?", "задачи, план и идеи исчезнут. останется пустое приложение.", "сбросить всё", () => {
     const theme = state.theme;
+    closeSheet();
     try { localStorage.removeItem(KEY); } catch (e) {}
-    state = seedState();
-    state.theme = theme;
-    state.firstRun = false;
+    releaseWakeLock();
+    state = nakedState(theme);
+    ui.open.clear();
+    ui.closed.clear();
+    ui.timerModalFor = null;
     save();
-    setView("today");
     renderAll();
-    toast("данные сброшены");
+    setView("today", { force: true });
+    toast("всё чисто");
   }, true);
 }
 
@@ -1554,6 +1711,8 @@ document.addEventListener("click", event => {
     else { card.classList.add("expanded"); ui.open.add(taskId); ui.closed.delete(taskId); }
     return;
   }
+  if (act === "next") { nextEntry(); return; }
+  if (act === "reset-all") { resetAll(); return; }
   if (act === "start") { startTask(taskId, stepId); return; }
   if (act === "complete") { completeStep(taskId, stepId); return; }
   if (act === "not-today") { skipCurrent(taskId, stepId); return; }
@@ -1586,6 +1745,11 @@ document.addEventListener("click", event => {
   if (act === "replan") { openVideoEditor("replan"); return; }
   if (act === "edit-video") { openVideoEditor("edit"); return; }
   if (act === "new-video") {
+    if (!state.video) {
+      setView("video");
+      renderAll();
+      return;
+    }
     openConfirm("начать другой ролик?", "шаги текущего плана заменятся. свои задачи и идеи останутся.", "начать", () => {
       state.tasks = state.tasks.filter(t => t.source !== "video");
       state.video = null;
@@ -1659,14 +1823,6 @@ document.addEventListener("keydown", event => {
   if (event.key === "Escape") closeSheet();
 });
 
-let tapCount = 0, tapTimer = null;
-$("#copyright").addEventListener("click", () => {
-  tapCount++;
-  clearTimeout(tapTimer);
-  tapTimer = setTimeout(() => { tapCount = 0; }, 1800);
-  if (tapCount >= 5) { tapCount = 0; resetAll(); }
-});
-
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState !== "visible") return;
   if (state.lastOpen && state.lastOpen !== todayISO()) {
@@ -1689,8 +1845,8 @@ function init() {
   setTheme(state.theme);
   setupPWA();
   rollover();
-  setView("today");
   renderAll();
+  setView("today", { force: true });
   animateHonor();
   setInterval(tick, 1000);
   setTimeout(tick, 350);
